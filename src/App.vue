@@ -10,7 +10,7 @@ import HelloWorld from './components/HelloWorld.vue'
         <div class="wrapper">
             <HelloWorld msg="You did it!" />
 
-            <nav>
+            <nav class="w-full text-center mt-8">
                 <RouterLink to="/">Home</RouterLink>
                 <RouterLink to="/about">About</RouterLink>
             </nav>
@@ -38,9 +38,6 @@ nav {
     margin-top: 2rem;
 }
 
-nav a.router-link-exact-active {
-    color: var(--color-text);
-}
 
 nav a.router-link-exact-active:hover {
     background-color: transparent;
