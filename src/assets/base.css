@@ -1,14 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;0,800;1,200;1,400;1,800&display=swap');
 
-/* color palette from <https://github.com/vuejs/theme> */
 :root {
     --color-white: aliceblue;
-    --color-accent: #48A9A6;
-    --color-accent-dark: #061A40;
-}
+    --color-accent: #42b883;
+    --color-accent-dark: #061a40;
 
-/* semantic color variables for this project */
-:root {
-    --color-background: linear-gradient(-45deg, #7769DD,  #201289 ,#5948D5, #3526A6) no-repeat fixed;
+    --color-bg-1: #7769dd;
+    --color-bg-2: #201289;
+    --color-bg-3: #5948d5;
+    --color-bg-4: #3526a6;
+
+    --color-bg-gradient: linear-gradient(-45deg, #7769dd, #201289, #5948d5, #3526a6) no-repeat fixed;
+
     --section-gap: 160px;
 }
 
@@ -23,24 +26,12 @@
 body {
     min-height: 100vh;
     color: var(--color-white);
-    background: var(--color-background);
+    background: var(--color-bg-4);
     transition:
         color 0.5s,
         background-color 0.5s;
     line-height: 1.6;
-    font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        'Segoe UI',
-        Roboto,
-        Oxygen,
-        Ubuntu,
-        Cantarell,
-        'Fira Sans',
-        'Droid Sans',
-        'Helvetica Neue',
-        sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 15px;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
