@@ -45,3 +45,19 @@ h3 {
     font-size: 2em;
     margin-bottom: 1rem;
 }
+
+select {
+    padding: 0.5rem;
+    border: 1px solid var(--color-accent);
+    border-radius: 5px;
+    background-color: transparent;
+    font-size: 1rem;
+    font-weight: inherit;
+}
+
+option {
+    background-color: var(--color-bg-4);
+    color: var(--color-accent);
+    font-size: 1rem;
+    font-weight: inherit;
+}

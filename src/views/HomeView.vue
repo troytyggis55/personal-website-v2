@@ -1,9 +1,19 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import MarkdownRenderer from '@/components/MarkdownRenderer.vue'
+import ContainerCard from '@/components/ContainerCard.vue'
+import DemoPathfinding from '@/components/DemoPathfinding.vue'
 </script>
 
 <template>
     <main>
-        <TheWelcome />
+        <main class="flex flex-row flex-wrap gap-4 justify-center">
+            <ContainerCard>
+                <MarkdownRenderer filename="AboutMe" />
+            </ContainerCard>
+            <ContainerCard>
+                <h2>Pathfinding </h2>
+                <DemoPathfinding />
+            </ContainerCard>
+        </main>
     </main>
 </template>
