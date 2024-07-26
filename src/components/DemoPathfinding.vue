@@ -74,8 +74,12 @@ onMounted(() => {
     canvas.addEventListener('mousedown', handleMouseDownOrTouchStart)
     canvas.addEventListener('touchstart', handleMouseDownOrTouchStart)
 
-    canvas.addEventListener('mouseenter', () => { mouseEnter = true })
-    canvas.addEventListener('mouseleave', () => { mouseEnter = false })
+    canvas.addEventListener('mouseenter', () => {
+        mouseEnter = true
+    })
+    canvas.addEventListener('mouseleave', () => {
+        mouseEnter = false
+    })
 
     canvas.addEventListener('mouseup', handleMouseUpOrTouchEnd)
     canvas.addEventListener('touchend', handleMouseUpOrTouchEnd)
@@ -182,8 +186,8 @@ const pathfind = (canvas: HTMLCanvasElement) => {
                     (algorithm.value === 'aStar' || algorithm.value === 'greedy'
                         ? (geometry.value === 'manhatten'
                               ? neighbor.getManhattenDistanceTo(end)
-                              : neighbor.getEuclideanDistanceTo(end))
-                        * (algorithm.value === 'greedy' ? strength.value : 1)
+                              : neighbor.getEuclideanDistanceTo(end)) *
+                          (algorithm.value === 'greedy' ? strength.value : 1)
                         : 0)
                 neighbor.previous = current
 
@@ -265,7 +269,7 @@ const setCellByPixel = (canvas: HTMLCanvasElement, x: number, y: number, color: 
 </script>
 
 <template>
-    <div class="flex flex-col gap-3">
+    <div class="flex flex-col gap-3 items-center">
         <div class="flex flex-row gap-2 justify-center">
             <ButtonToggle text="Layout" value="layout" v-model="menu" />
             <ButtonToggle text="Algorithm" value="algo" v-model="menu" />
@@ -314,7 +318,7 @@ const setCellByPixel = (canvas: HTMLCanvasElement, x: number, y: number, color: 
                 <span>Searched: {{ searched }}</span>
             </div>
         </div>
-        <canvas id="pathfinding"></canvas>
+        <canvas id="pathfinding" class="max-w-sm" />
     </div>
 </template>
 

@@ -6,12 +6,12 @@ import DemoPathfinding from '@/components/DemoPathfinding.vue'
 
 <template>
     <main>
-        <main class="flex flex-row flex-wrap gap-4 justify-center">
+        <main class="flex flex-col md:flex-row gap-4 justify-center">
             <ContainerCard>
                 <MarkdownRenderer filename="AboutMe" />
             </ContainerCard>
             <ContainerCard>
-                <h2>Pathfinding </h2>
+                <h2>Pathfinding</h2>
                 <DemoPathfinding />
             </ContainerCard>
         </main>
