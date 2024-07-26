@@ -1,6 +1,7 @@
 <template>
     <div
-        class="outer bg-white bg-opacity-25 overflow-hidden transition-all duration-300 w-full backdrop-filter backdrop-blur-sm shadow-xl">
+        class="outer bg-white bg-opacity-25 overflow-hidden transition-all duration-300 w-full backdrop-filter backdrop-blur-sm shadow-xl"
+    >
         <div class="h-full pl-5 pr-5 pb-5 overflow-auto overflow-wrap">
             <slot></slot>
         </div>
