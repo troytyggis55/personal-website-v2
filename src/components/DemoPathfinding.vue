@@ -3,7 +3,7 @@ import { computed, onMounted, ref, watch } from 'vue'
 import ButtonToggle from '@/components/ButtonToggle.vue'
 import Node from '@/demos/pathfinding'
 
-const max = 500
+const max = 300
 const res = ref(25)
 const cellSize = computed(() => max / res.value)
 
@@ -285,7 +285,7 @@ const setCellByPixel = (canvas: HTMLCanvasElement, x: number, y: number, color: 
         <div class="flex flex-row flex-wrap gap-2 justify-center" v-if="menu === 'settings'">
             <div class="flex flex-col">
                 <span>Resolution</span>
-                <input type="range" min="5" max="50" v-model="res" />
+                <input type="range" min="5" max="30" v-model="res" />
             </div>
             <div class="flex flex-col">
                 <span>Speed</span>

@@ -55,10 +55,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-#header {
-    margin-top: 20px;
-}
-
 #title {
     margin: 0;
     padding: 0;

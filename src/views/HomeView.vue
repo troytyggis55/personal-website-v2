@@ -3,32 +3,57 @@ import MarkdownRenderer from '@/components/MarkdownRenderer.vue'
 import ContainerCard from '@/components/ContainerCard.vue'
 import DemoPathfinding from '@/components/DemoPathfinding.vue'
 import ContainerCarousel from '@/components/ContainerCarousel.vue'
-import ContainerInstagram from '@/components/ContainerInstagram.vue'
 </script>
 
 <template>
-    <main>
-        <main class="flex flex-col md:flex-row gap-4 justify-center">
+    <main class="flex flex-col gap-4">
+        <div class="flex flex-col md:flex-row gap-4 justify-center">
             <ContainerCard>
                 <MarkdownRenderer filename="AboutMe" />
                 <ContainerCarousel>
-                    <li class="glide__slide">
+                    <li class="glide__slide items-center">
                         <img src="/images/aboutme/hs.jpg" alt="Image 1" />
-                    </li>
-                    <li class="glide__slide">
-                        <img src="/images/aboutme/snowboard.jpeg" alt="Image 2" />
-                    </li>
-                    <li class="glide__slide">
-                        <ContainerInstagram
-                            permalink="https://www.instagram.com/reel/C6szQ95NQ6f/?utm_source=ig_embed&amp;utm_campaign=loading"
-                        />
                     </li>
                 </ContainerCarousel>
             </ContainerCard>
-            <ContainerCard>
+            <ContainerCard class="max-w-md">
                 <h2>Pathfinding</h2>
                 <DemoPathfinding />
             </ContainerCard>
-        </main>
+        </div>
+        <ContainerCard>
+            <h1>Skills</h1>
+            <div class="flex flex-row flex-wrap gap-10 justify-center">
+                <img
+                    class="h-40 hover-glow"
+                    src="/public/svg/java.svg"
+                    alt="Java Logo"
+                    title="Java"
+                />
+                <img
+                    class="h-40 hover-glow"
+                    src="/public/svg/python.svg"
+                    alt="Python Logo"
+                    title="Python"
+                />
+                <img
+                    class="h-40 hover-glow"
+                    src="/public/svg/javascript.svg"
+                    alt="JavaScript Logo"
+                    title="JavaScript"
+                />
+                <img class="h-40 hover-glow" src="/public/svg/cpp.svg" alt="C++ Logo" title="C++" />
+            </div>
+        </ContainerCard>
     </main>
 </template>
+
+<style scoped>
+.hover-glow {
+    transition: filter 0.2s;
+}
+
+.hover-glow:hover {
+    filter: drop-shadow(0 0 10px white);
+}
+</style>
