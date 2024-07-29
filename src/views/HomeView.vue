@@ -14,6 +14,12 @@ import ContainerCarousel from '@/components/ContainerCarousel.vue'
                     <li class="glide__slide items-center">
                         <img src="/images/aboutme/hs.jpg" alt="Image 1" />
                     </li>
+                    <li class="glide__slide items-center">
+                        <img src="/images/aboutme/hs.jpg" alt="Image 2" />
+                    </li>
+                    <li class="glide__slide items-center">
+                        <img src="/images/aboutme/hs.jpg" alt="Image 3" />
+                    </li>
                 </ContainerCarousel>
             </ContainerCard>
             <ContainerCard class="max-w-md">
@@ -48,7 +54,8 @@ import ContainerCarousel from '@/components/ContainerCarousel.vue'
     </main>
 </template>
 
-<style scoped>
+<style>
+// ToDo: Add hover-glow class to global styles
 .hover-glow {
     transition: filter 0.2s;
 }
