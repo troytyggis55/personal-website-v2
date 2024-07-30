@@ -23,13 +23,13 @@
         </div>
         <div class="flex gap-2 justify-center">
             <a href="https://github.com/troytyggis55" target="”_blank”">
-                <img src="/public/svg/github.svg" alt="Github Logo" class="h-10" />
+                <img src="/public/svg/github.svg" alt="Github Logo" class="h-10 hover-glow" />
             </a>
             <a
                 href="https://www.linkedin.com/in/trygve-j%C3%B8rgensen-80b1b9259/"
                 target="”_blank”"
             >
-                <img src="/public/svg/linkedin.svg" alt="LinkedIn Logo" class="h-10" />
+                <img src="/public/svg/linkedin.svg" alt="LinkedIn Logo" class="h-10 hover-glow" />
             </a>
         </div>
     </footer>

@@ -1,6 +1,6 @@
 <template>
     <main class="flex flex-col gap-4">
-        <h1>Programming Demos</h1>
+        <h2>Programming Demos</h2>
     </main>
 </template>
 

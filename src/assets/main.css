@@ -26,12 +26,6 @@ a {
     font-weight: inherit;
 }
 
-@media (hover: hover) {
-    a:hover {
-        background-color: var(--color-accent-dark);
-    }
-}
-
 h1,
 h2,
 h3 {
