@@ -269,6 +269,7 @@ const setCellByPixel = (canvas: HTMLCanvasElement, x: number, y: number, color: 
 </script>
 
 <template>
+    <h2>Pathfinding</h2>
     <div class="flex flex-col gap-3 items-center">
         <div class="flex flex-row gap-2 justify-center">
             <ButtonToggle text="Layout" value="layout" v-model="menu" />

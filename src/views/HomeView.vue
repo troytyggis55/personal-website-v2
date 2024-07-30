@@ -10,6 +10,7 @@ import ContainerCarousel from '@/components/ContainerCarousel.vue'
         <div class="flex flex-col md:flex-row gap-4 justify-center">
             <ContainerCard>
                 <MarkdownRenderer filename="AboutMe" />
+                <br>
                 <ContainerCarousel>
                     <li class="glide__slide items-center">
                         <img src="/images/aboutme/hs.jpg" alt="Image 1" />
@@ -22,13 +23,21 @@ import ContainerCarousel from '@/components/ContainerCarousel.vue'
                     </li>
                 </ContainerCarousel>
             </ContainerCard>
-            <ContainerCard class="max-w-md">
-                <h2>Pathfinding</h2>
-                <DemoPathfinding />
+            <ContainerCard class="md:max-w-md w-full">
+                <DemoPathfinding/>
+                <br>
+                <div class="flex justify-center">
+                    <router-link to="/demo" class="hover:bg-transparent">
+                        <button
+                            class="p-3 text-white border-white border hover:bg-blue-500 transition">
+                            More Demos
+                        </button>
+                    </router-link>
+                </div>
             </ContainerCard>
         </div>
         <ContainerCard>
-            <h1>Skills</h1>
+            <h2>Skills</h2>
             <div class="flex flex-row flex-wrap gap-10 justify-center">
                 <img
                     class="h-40 hover-glow"
@@ -55,7 +64,6 @@ import ContainerCarousel from '@/components/ContainerCarousel.vue'
 </template>
 
 <style>
-// ToDo: Add hover-glow class to global styles
 .hover-glow {
     transition: filter 0.2s;
 }
