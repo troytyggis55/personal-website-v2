@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import ButtonToggle from '@/components/ButtonToggle.vue'
 import Node from '@/demos/pathfinding'
 
@@ -143,19 +143,20 @@ const pathfind = (canvas: HTMLCanvasElement) => {
     queue.push(start)
 
     interval = setInterval(() => {
+        console.log('interval') // TODO fix this looping after path is found
+
         if (queue.length === 0) {
-            clearInterval(interval)
-            interval = undefined
+            clearCurrentInterval()
             return
         }
 
         const current = queue.shift() as Node
-        searched.value++
+        searched.value = searched.value + 1
         distance.value = parseFloat(current.distanceFromStart.toFixed(2))
 
         if (current.equals(end)) {
             showPath(canvas, current)
-            clearInterval(interval)
+            clearInterval(interval) // Only clear this interval, pathInterval will be cleared when path is shown
             return
         }
         current.state = current === start ? 'blue' : 'yellow'
@@ -206,7 +207,7 @@ const showPath = (canvas: HTMLCanvasElement, current: Node) => {
 
     pathInterval = setInterval(() => {
         if (!previous) {
-            clearInterval(pathInterval)
+            clearCurrentInterval()
             return
         }
         previous.state = previous.state === 'blue' ? 'blue' : 'green'
@@ -266,6 +267,10 @@ const setCellByPixel = (canvas: HTMLCanvasElement, x: number, y: number, color: 
     cells[cellX][cellY].state = color
     cells[cellX][cellY].draw(canvas.getContext('2d') as CanvasRenderingContext2D, cellSize)
 }
+
+onUnmounted(() => {
+    clearCurrentInterval()
+})
 </script>
 
 <template>
