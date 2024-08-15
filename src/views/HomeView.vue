@@ -41,23 +41,23 @@ import ContainerCarousel from '@/components/ContainerCarousel.vue'
             <div class="flex flex-row flex-wrap gap-10 justify-center">
                 <img
                     class="h-40 hover-glow"
-                    src="/public/svg/java.svg"
+                    src="/src/svg/java.svg"
                     alt="Java Logo"
                     title="Java"
                 />
                 <img
                     class="h-40 hover-glow"
-                    src="/public/svg/python.svg"
+                    src="/src/svg/python.svg"
                     alt="Python Logo"
                     title="Python"
                 />
                 <img
                     class="h-40 hover-glow"
-                    src="/public/svg/javascript.svg"
+                    src="/src/svg/javascript.svg"
                     alt="JavaScript Logo"
                     title="JavaScript"
                 />
-                <img class="h-40 hover-glow" src="/public/svg/cpp.svg" alt="C++ Logo" title="C++" />
+                <img class="h-40 hover-glow" src="/src/svg/cpp.svg" alt="C++ Logo" title="C++" />
             </div>
         </ContainerCard>
     </main>

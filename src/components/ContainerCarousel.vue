@@ -12,14 +12,14 @@
             <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
                 <img
                     class="h-10 opacity-35 hover:opacity-100 transition-opacity"
-                    src="/public/svg/arrow-left.svg"
+                    src="/src/svg/arrow-left.svg"
                     alt="Left Arrow"
                 />
             </button>
             <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
                 <img
                     class="h-10 opacity-35 hover:opacity-100 transition-opacity"
-                    src="/public/svg/arrow-right.svg"
+                    src="/src/svg/arrow-right.svg"
                     alt="Right Arrow"
                 />
             </button>
