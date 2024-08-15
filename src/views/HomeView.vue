@@ -3,6 +3,10 @@ import MarkdownRenderer from '@/components/MarkdownRenderer.vue'
 import ContainerCard from '@/components/ContainerCard.vue'
 import DemoPathfinding from '@/components/DemoPathfinding.vue'
 import ContainerCarousel from '@/components/ContainerCarousel.vue'
+import { ref } from 'vue'
+
+const showDemo = ref(true)
+
 </script>
 
 <template>
@@ -24,12 +28,22 @@ import ContainerCarousel from '@/components/ContainerCarousel.vue'
                 </ContainerCarousel>
             </ContainerCard>
             <ContainerCard class="md:max-w-md w-full">
-                <DemoPathfinding/>
+                <DemoPathfinding v-if="showDemo" />
+                <button v-else @click="showDemo = true"
+                        class="text-5xl w-full h-full min-h-56 text-white border-white border hover:bg-blue-500 transition">
+                    Start Demo
+                </button>
+
                 <br>
-                <div class="flex justify-center">
-                    <router-link to="/demo" class="hover:bg-transparent">
-                        <button
-                            class="p-3 text-white border-white border hover:bg-blue-500 transition">
+                <div class="flex justify-center gap-2" v-if="showDemo">
+                    <button
+                        class="p-3 text-white border-white border hover:bg-blue-500 transition"
+                        @click="showDemo = false"
+                    >
+                        Stop Demo
+                    </button>
+                    <router-link to="/demo" class="p-3 text-white border-white border hover:bg-blue-500 transition appearance-none">
+                        <button>
                             More Demos
                         </button>
                     </router-link>
