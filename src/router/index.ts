@@ -12,10 +12,19 @@ const router = createRouter({
         {
             path: '/demo',
             name: 'demo',
-            // route level code-splitting
-            // this generates a separate chunk (About.[hash].js) for this route
-            // which is lazy-loaded when the route is visited.
-            component: () => import('../views/DemoView.vue')
+            component: () => import('../views/DemoView.vue'),
+            children: [
+                {
+                    path: ':pathfinding',
+                    name: 'pathfinding',
+                    component: () => import('../views/demos/PathfindingView.vue')
+                },
+                {
+                    path: ':fluid-simulation',
+                    name: 'fluid-simulation',
+                    component: () => import('../components/HelloWorld.vue')
+                }
+            ]
         }
     ]
 })

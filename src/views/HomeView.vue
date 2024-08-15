@@ -6,7 +6,6 @@ import ContainerCarousel from '@/components/ContainerCarousel.vue'
 import { ref } from 'vue'
 
 const showDemo = ref(true)
-
 </script>
 
 <template>
@@ -14,7 +13,7 @@ const showDemo = ref(true)
         <div class="flex flex-col md:flex-row gap-4 justify-center">
             <ContainerCard>
                 <MarkdownRenderer filename="AboutMe" />
-                <br>
+                <br />
                 <ContainerCarousel>
                     <li class="glide__slide items-center">
                         <img src="/images/aboutme/hs.jpg" alt="Image 1" />
@@ -29,12 +28,15 @@ const showDemo = ref(true)
             </ContainerCard>
             <ContainerCard class="md:max-w-md w-full">
                 <DemoPathfinding v-if="showDemo" />
-                <button v-else @click="showDemo = true"
-                        class="text-5xl w-full h-full min-h-56 text-white border-white border hover:bg-blue-500 transition">
+                <button
+                    v-else
+                    @click="showDemo = true"
+                    class="text-5xl w-full h-full min-h-56 text-white border-white border hover:bg-blue-500 transition"
+                >
                     Start Demo
                 </button>
 
-                <br>
+                <br />
                 <div class="flex justify-center gap-2" v-if="showDemo">
                     <button
                         class="p-3 text-white border-white border hover:bg-blue-500 transition"
@@ -42,10 +44,11 @@ const showDemo = ref(true)
                     >
                         Stop Demo
                     </button>
-                    <router-link to="/demo" class="p-3 text-white border-white border hover:bg-blue-500 transition appearance-none">
-                        <button>
-                            More Demos
-                        </button>
+                    <router-link
+                        to="/demo"
+                        class="p-3 text-white border-white border hover:bg-blue-500 transition appearance-none"
+                    >
+                        <button>More Demos</button>
                     </router-link>
                 </div>
             </ContainerCard>
@@ -53,12 +56,7 @@ const showDemo = ref(true)
         <ContainerCard>
             <h2>Skills</h2>
             <div class="flex flex-row flex-wrap gap-10 justify-center">
-                <img
-                    class="h-40 hover-glow"
-                    src="/src/svg/java.svg"
-                    alt="Java Logo"
-                    title="Java"
-                />
+                <img class="h-40 hover-glow" src="/src/svg/java.svg" alt="Java Logo" title="Java" />
                 <img
                     class="h-40 hover-glow"
                     src="/src/svg/python.svg"
