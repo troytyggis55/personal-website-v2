@@ -2,10 +2,11 @@
     <main class="flex flex-col gap-4">
         <h2>Programming Demos</h2>
         <select v-if="isMediumScreen" v-model="selectedDemo">
-            <option v-for="demo in demos" :key="demo.name" :value="demo.path">{{ demo.name }}</option>
+            <option v-for="demo in demos" :key="demo.name" :value="demo.path">
+                {{ demo.name }}
+            </option>
         </select>
-        <div class="flex flex-col max-w-sm" v-else>
-        </div>
+        <div class="flex flex-col max-w-sm" v-else></div>
 
         <router-view />
     </main>
@@ -18,18 +19,18 @@ import { useRouter } from 'vue-router'
 const demos = [
     {
         name: 'Pathfinding',
-        path: 'pathfinding',
+        path: 'pathfinding'
     },
     {
         name: 'Fluid Simulation',
-        path: 'fluid-simulation',
+        path: 'fluid-simulation'
     }
 ]
 
 const selectedDemo = ref(demos[0].path)
 const router = useRouter()
 
-watch(selectedDemo, (newDemoPath) => {
+watch(selectedDemo, newDemoPath => {
     router.push({ path: newDemoPath })
 })
 

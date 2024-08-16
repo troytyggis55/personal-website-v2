@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import ButtonToggle from '@/components/ButtonToggle.vue'
-import Node from '@/demos/pathfinding'
+import Node from '../demos/pathfinding'
 
 const max = 300
 const res = ref(25)
 const cellSize = computed(() => max / res.value)
 
 const tick = ref(200)
-let interval: number | undefined
-let pathInterval: number | undefined
+let searchInterval: NodeJS.Timeout | undefined
+let pathInterval: NodeJS.Timeout | undefined
 
 const algorithm = ref('dijkstra')
 const geometry = ref('manhatten')
@@ -66,7 +66,8 @@ onMounted(() => {
             if (e instanceof MouseEvent) {
                 setCellByPixel(canvas, e.clientX, e.clientY, cellColor.value)
             } else {
-                setCellByPixel(canvas, e.touches[0].clientX, e.touches[0].clientY, cellColor.value)
+                setCellByPixel(canvas, e.touches[0].clientX, e.touches[0].clientY,
+                    cellColor.value)
             }
         }
     }
@@ -89,10 +90,10 @@ onMounted(() => {
 })
 
 const clearCurrentInterval = () => {
-    clearInterval(interval)
+    clearInterval(searchInterval)
     clearInterval(pathInterval)
 
-    interval = undefined
+    searchInterval = undefined
     pathInterval = undefined
 }
 
@@ -142,9 +143,7 @@ const pathfind = (canvas: HTMLCanvasElement) => {
     const queue: Node[] = []
     queue.push(start)
 
-    interval = setInterval(() => {
-        console.log('interval') // TODO fix this looping after path is found
-
+    searchInterval = setInterval(() => {
         if (queue.length === 0) {
             clearCurrentInterval()
             return
@@ -156,7 +155,7 @@ const pathfind = (canvas: HTMLCanvasElement) => {
 
         if (current.equals(end)) {
             showPath(canvas, current)
-            clearInterval(interval) // Only clear this interval, pathInterval will be cleared when path is shown
+            clearInterval(searchInterval) // Only clear this interval, pathInterval will be cleared when path is shown
             return
         }
         current.state = current === start ? 'blue' : 'yellow'
@@ -242,6 +241,8 @@ const clearSearch = (canvas: HTMLCanvasElement) => {
 
 const setCellByPixel = (canvas: HTMLCanvasElement, x: number, y: number, color: string) => {
     const rect = canvas.getBoundingClientRect()
+    if (x < rect.left || x + 1 >= rect.right || y < rect.top || y + 1 >= rect.bottom) return
+
     const scaleX = canvas.width / rect.width
     const scaleY = canvas.height / rect.height
 

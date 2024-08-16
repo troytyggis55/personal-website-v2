@@ -1,12 +1,9 @@
 <script setup lang="ts">
-
 import DemoPathfinding from '@/components/DemoPathfinding.vue'
 </script>
 
 <template>
-<DemoPathfinding />
+    <DemoPathfinding />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
