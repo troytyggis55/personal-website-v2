@@ -14,9 +14,11 @@
   },
   "dependencies": {
     "@glidejs/glide": "^3.6.1",
+    "@types/victor": "^1.1.5",
     "front-matter": "^4.0.2",
     "markdown-it": "^14.1.0",
     "pinia": "^2.1.7",
+    "victor": "^1.1.0",
     "vue": "^3.4.27",
     "vue-router": "^4.3.0"
   },

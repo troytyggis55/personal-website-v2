@@ -22,7 +22,7 @@ const router = createRouter({
                 {
                     path: ':fluid-simulation',
                     name: 'fluid-simulation',
-                    component: () => import('../components/HelloWorld.vue')
+                    component: () => import('../views/demos/FluidView.vue')
                 }
             ]
         }
