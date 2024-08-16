@@ -6,13 +6,13 @@ let interval: NodeJS.Timeout | null = null;
 
 const max = 500;
 
-const idealSearchRadius = ref(49);
+const idealSearchRadius = ref<number>(49);
 const searchRadius = computed(() => max / Math.round(max / idealSearchRadius.value));
 
-const repelForce = ref(0.01);
-const gravity = ref(0.1);
-const friction = ref(0.995);
-const maxSpeed = ref(5);
+const repelForce = ref<number>(0.01);
+const gravity = ref<number>(0.5);
+const friction = ref<number>(0);
+const maxSpeed = ref<number>(5);
 
 onMounted(() => {
     const canvas = document.getElementById('fluidsimulation') as HTMLCanvasElement;
@@ -48,7 +48,8 @@ onMounted(() => {
         }
 
         for (let node of nodes) {
-            node.move(canvas, gravity.value, friction.value, maxSpeed.value, searchRadius.value);
+            node.move(canvas, gravity.value, friction.value, maxSpeed.value,
+                searchRadius.value);
             node.draw(ctx);
         }
     }, 1000 / 60);
@@ -152,5 +153,29 @@ onUnmounted(() => {
 </script>
 
 <template>
+    <h2>Fluid Simulation</h2>
+    <div class="flex flex-row flex-wrap gap-4">
+        <div class="flex flex-col">
+            <span>Search Radius {{ searchRadius.toFixed(2) }}</span>
+            <input type="range" min="10" max="100" v-model.number="idealSearchRadius" class="w-full">
+        </div>
+        <div class="flex flex-col">
+            <span>Repel Force {{ repelForce }}</span>
+            <input type="range" min="0" max="0.1" step="0.001" v-model.number="repelForce"
+                   class="w-full">
+        </div>
+        <div class="flex flex-col">
+            <span>Gravity {{ gravity }}</span>
+            <input type="range" min="0" max="1" step="0.1" v-model.number="gravity" class="w-full">
+        </div>
+        <div class="flex flex-col">
+            <span>Friction {{ friction }}</span>
+            <input type="range" min="0" max="1" step="0.1" v-model.number="friction" class="w-full">
+        </div>
+        <div class="flex flex-col">
+            <span>Max Speed {{ maxSpeed }}</span>
+            <input type="range" min="1" max="20" v-model.number="maxSpeed" class="w-full">
+        </div>
+    </div>
     <canvas id="fluidsimulation" class="max-w-md"></canvas>
 </template>

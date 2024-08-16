@@ -70,7 +70,7 @@ class Fluid {
         searchRadius: number
     ): void {
         this.vel.y += gravity
-        this.vel.multiplyScalar(friction)
+        this.vel.multiplyScalar(1 - friction)
         if (this.vel.magnitude() > maxSpeed) {
             this.vel.normalize()
             this.vel.multiplyScalar(maxSpeed)
