@@ -14,6 +14,8 @@ const gravity = ref<number>(0.5);
 const friction = ref<number>(0);
 const maxSpeed = ref<number>(5);
 
+const nodeAmount = ref<number>(100);
+
 onMounted(() => {
     const canvas = document.getElementById('fluidsimulation') as HTMLCanvasElement;
     const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
@@ -121,6 +123,7 @@ const createNode = (canvas: HTMLCanvasElement, x: number, y: number, nodes: Node
 
     const newNode = new Node(canvasX, canvasY);
     nodes.push(newNode);
+    nodeAmount.value = nodes.length;
 }
 
 const updateGrid = (canvas: HTMLCanvasElement, grid: Node[][][], nodes: Node[]) => {
@@ -176,6 +179,7 @@ onUnmounted(() => {
             <span>Max Speed {{ maxSpeed }}</span>
             <input type="range" min="1" max="20" v-model.number="maxSpeed" class="w-full">
         </div>
+        <span>Particles: {{ nodeAmount }}</span>
     </div>
     <canvas id="fluidsimulation" class="max-w-md"></canvas>
 </template>
