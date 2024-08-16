@@ -45,7 +45,7 @@ const showDemo = ref(true)
                         Stop Demo
                     </button>
                     <router-link
-                        to="/demo"
+                        to="/demo/pathfinding"
                         class="p-3 text-white border-white border hover:bg-blue-500 transition appearance-none"
                     >
                         <button>More Demos</button>
