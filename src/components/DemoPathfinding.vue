@@ -306,8 +306,8 @@ onUnmounted(() => {
 </script>
 
 <template>
+    <div class="flex flex-col gap-3">
     <h2>Pathfinding</h2>
-    <div class="flex flex-col gap-3 items-center">
         <div class="flex flex-row gap-2 justify-center">
             <ButtonToggle text="Layout" value="layout" v-model="menu" />
             <ButtonToggle text="Algorithm" value="algo" v-model="menu" />

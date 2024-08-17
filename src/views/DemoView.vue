@@ -1,7 +1,5 @@
 <template>
     <main class="flex flex-col gap-4">
-        <h2>Programming Demos</h2>
-
         <ContainerCard>
             <div class="flex flex-row gap-6" :class="{ 'flex-col': isMediumScreen }">
                 <select v-if="isMediumScreen" v-model="selectedDemo">
