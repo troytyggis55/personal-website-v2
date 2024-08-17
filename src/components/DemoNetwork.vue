@@ -7,13 +7,10 @@ let resizeListener: (() => void) | undefined
 
 onMounted(() => {
     const canvas = document.getElementById('networkgraphic') as HTMLCanvasElement
-    if (!canvas) {
-        console.error('Canvas element not found!')
-        return
-    }
 
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight
+
     let pixelAmount = canvas.width * canvas.height
     const searchRadiusFraction = 2
 
@@ -21,10 +18,6 @@ onMounted(() => {
     const minNodeAmount = 5
 
     const ctx = canvas.getContext('2d')
-    if (!ctx) {
-        console.error('Canvas context not found!')
-        return
-    }
     ctx.fillStyle = 'white'
 
     let nodes: Node[] = []

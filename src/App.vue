@@ -3,7 +3,7 @@ import DemoNetwork from '@/components/DemoNetwork.vue'
 
 import { useSessionStore } from './stores/session'
 import { ref, watch } from 'vue'
-import ButtonEffects from '@/components/ButtonEffects.vue'
+import ButtonNetwork from '@/components/ButtonNetwork.vue'
 
 const store = useSessionStore()
 let state = ref(store.showEffects)
@@ -14,8 +14,10 @@ watch(() => store.showEffects, (newVal) => {
 </script>
 
 <template>
-    <DemoNetwork v-if="state" />
-    <ButtonEffects />
+    <Transition name="network">
+        <DemoNetwork v-if="state" class="" />
+    </Transition>
+    <ButtonNetwork />
 
     <header class="flex justify-between mb-4 gap-4">
         <router-link to="/" class="mt-auto mb-auto justify-center">
@@ -61,4 +63,12 @@ watch(() => store.showEffects, (newVal) => {
     </footer>
 </template>
 
-<style scoped></style>
+<style scoped>
+.network-enter-active, .network-leave-active {
+    transition: 0.5s;
+}
+
+.network-enter-from, .network-leave-to {
+    opacity: 0;
+}
+</style>

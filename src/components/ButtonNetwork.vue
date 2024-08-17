@@ -1,8 +1,8 @@
 <template>
     <div
         @click="toggleButton"
-        class="fixed bottom-5 right-[5%] z-10 w-16 h-16 rounded-full flex justify-center items-center transition-all duration-500 bg-green-600"
-        :class="{ 'bg-gray-400': !state }"
+        class="fixed bottom-5 right-[5%] z-10 w-16 h-16 rounded-full flex justify-center items-center transition-all duration-500"
+        :class="{ 'bg-gray-400': !state, 'bg-green-600': state}"
     >
         <button
             :class="{ 'toggle': state }"
