@@ -1,8 +1,8 @@
 import Victor from 'victor'
 
 class Network {
-    pos: Victor
-    vel: Victor
+    pos: InstanceType<typeof Victor>;
+    vel: InstanceType<typeof Victor>;
     searchRadius: number
     trueNeighbors: Network[]
     aboveNeighbors: Network[]
@@ -28,7 +28,7 @@ class Network {
         this.belowNeighbors = []
         this.leftNeighbors = []
         this.rightNeighbors = []
-        let checkedNodes = nodes.slice()
+        const checkedNodes = nodes.slice()
 
         for (let node of checkedNodes) {
             if (node === this) {

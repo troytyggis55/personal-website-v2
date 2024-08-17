@@ -15,7 +15,6 @@ const router = createRouter({
             redirect: '/demo/pathfinding',
             children: [
                 {
-                    default: true,
                     path: ':pathfinding',
                     name: 'pathfinding',
                     component: () => import('../views/demos/PathfindingView.vue')

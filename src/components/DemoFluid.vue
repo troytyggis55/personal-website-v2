@@ -4,7 +4,7 @@ import Node from '../demos/fluid'
 import Victor from 'victor'
 import ButtonToggle from '@/components/ButtonToggle.vue'
 
-let interval: NodeJS.Timeout | null = null
+let interval: ReturnType<typeof setTimeout> | undefined
 
 const max = 500
 

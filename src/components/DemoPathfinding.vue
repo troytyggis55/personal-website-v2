@@ -8,8 +8,8 @@ const res = ref(50)
 const cellSize = computed(() => max / res.value)
 
 const tick = ref(50)
-let searchInterval: NodeJS.Timeout | undefined
-let pathInterval: NodeJS.Timeout | undefined
+let searchInterval: ReturnType<typeof setTimeout> | undefined
+let pathInterval: ReturnType<typeof setTimeout> | undefined
 
 const algorithm = ref('aStar')
 const geometry = ref('manhatten')

@@ -2,7 +2,7 @@
     <div id="header">
         <h2 id="title">{{ metaData.title }}</h2>
         <div id="details">
-            <b v-if="metaData.date !== ''">{{ new Date(metaData.date).toDateString() }}</b>
+            <b v-if="metaData.date">{{ new Date(metaData.date).toDateString() }}</b>
             <p v-if="metaData.repo !== ''"><a :href="metaData.repo" target="_blank">Github</a></p>
             <b v-if="metaData.category !== ''">{{ metaData.category }}</b>
         </div>

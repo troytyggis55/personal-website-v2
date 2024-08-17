@@ -1,8 +1,8 @@
 import Victor from 'victor'
 
 class Fluid {
-    pos: Victor
-    vel: Victor
+    pos: InstanceType<typeof Victor>;
+    vel: InstanceType<typeof Victor>;
     neighbors: Fluid[]
 
     constructor(x: number, y: number) {
@@ -89,11 +89,6 @@ class Fluid {
         } else if (this.pos.y > canvas.height) {
             this.pos.y = Math.floor(canvas.height - 1)
         }
-
-        this.gridPos = new Victor(
-            Math.floor(this.pos.x / searchRadius),
-            Math.floor(this.pos.y / searchRadius)
-        )
     }
 
     draw(ctx: CanvasRenderingContext2D): void {

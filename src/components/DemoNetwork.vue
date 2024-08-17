@@ -2,7 +2,7 @@
 import { onMounted, onUnmounted } from 'vue'
 import Node from '../demos/network'
 
-let interval: NodeJS.Timeout | undefined
+let interval: ReturnType<typeof setTimeout> | undefined
 let resizeListener: (() => void) | undefined
 
 onMounted(() => {
@@ -17,7 +17,7 @@ onMounted(() => {
     const nodeFraction = 50000
     const minNodeAmount = 5
 
-    const ctx = canvas.getContext('2d')
+    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
     ctx.fillStyle = 'white'
 
     let nodes: Node[] = []

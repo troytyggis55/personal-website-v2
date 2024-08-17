@@ -28,7 +28,7 @@ watch(
             <h1 class="text-3xl sm:text-5xl text-white hover-glow">Trygve Jørgensen</h1>
         </router-link>
         <img
-            src="../images/KvadratProfilbilde.jpeg"
+            src="/images/KvadratProfilbilde.jpeg"
             alt="Profile picture"
             class="rounded-full shadow-xl size-20 sm:size-28"
         />
