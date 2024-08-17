@@ -9,8 +9,8 @@ const showDemo = ref(true)
 </script>
 
 <template>
-    <main class="flex flex-col gap-4">
-        <div class="flex flex-col md:flex-row gap-4 justify-center">
+    <main class="flex flex-col gap-6">
+        <div class="flex flex-col md:flex-row gap-6 justify-center">
             <ContainerCard>
                 <MarkdownRenderer filename="AboutMe" />
                 <br />

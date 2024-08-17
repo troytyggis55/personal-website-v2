@@ -3,7 +3,7 @@ import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import ButtonToggle from '@/components/ButtonToggle.vue'
 import Node from '../demos/pathfinding'
 
-const max = 300
+const max = 500
 const res = ref(25)
 const cellSize = computed(() => max / res.value)
 
@@ -324,7 +324,7 @@ onUnmounted(() => {
                 <span>Searched: {{ searched }}</span>
             </div>
         </div>
-        <canvas id="pathfinding" class="max-w-sm" />
+        <canvas id="pathfinding" class="w-full max-w-md h-auto" />
     </div>
 </template>
 

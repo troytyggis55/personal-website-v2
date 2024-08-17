@@ -28,7 +28,6 @@ h6 {
 
 ::-webkit-scrollbar-thumb {
     background: transparent;
-    border-radius: 10px 0 0 10px;
 }
 
 .outer:hover ::-webkit-scrollbar-thumb {

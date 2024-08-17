@@ -226,6 +226,6 @@ onUnmounted(() => {
             <span>Particles: {{ nodeAmount }}</span>
             <button @click="nodeAmount = 0">Clear</button>
         </div>
-        <canvas id="fluidsimulation" class="max-w-md"></canvas>
+        <canvas id="fluidsimulation" class="w-full max-w-md h-auto" />
     </div>
 </template>

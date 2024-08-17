@@ -2,8 +2,9 @@
 
 <template>
     <header class="flex justify-between mb-4 gap-4">
-        <router-link to="/" class="mt-auto mb-auto justify-center text-3xl sm:text-5xl text-white">
-            <h1>Trygve Jørgensen</h1>
+        <router-link to="/"
+                     class="mt-auto mb-auto justify-center">
+            <h1 class="text-3xl sm:text-5xl text-white">Trygve Jørgensen</h1>
         </router-link>
         <img
             src="../images/KvadratProfilbilde.jpeg"
