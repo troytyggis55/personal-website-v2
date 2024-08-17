@@ -59,6 +59,5 @@ onMounted(() => {
     })
 
     selectedDemo.value = router.currentRoute.value.name
-    console.log(selectedDemo.value)
 })
 </script>
