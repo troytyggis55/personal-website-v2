@@ -4,14 +4,14 @@ import ButtonToggle from '@/components/ButtonToggle.vue'
 import Node from '../demos/pathfinding'
 
 const max = 500
-const res = ref(25)
+const res = ref(50)
 const cellSize = computed(() => max / res.value)
 
-const tick = ref(200)
+const tick = ref(50)
 let searchInterval: NodeJS.Timeout | undefined
 let pathInterval: NodeJS.Timeout | undefined
 
-const algorithm = ref('dijkstra')
+const algorithm = ref('aStar')
 const geometry = ref('manhatten')
 const strength = ref(1)
 
@@ -33,7 +33,8 @@ onMounted(() => {
     canvas.width = max + 1
     canvas.height = max + 1
 
-    resetCanvas(canvas)
+    resetCanvas()
+    randomizeCanvas()
 
     let mouseDown = false
     let mouseEnter = false
@@ -101,7 +102,7 @@ watch([res], () => {
     const canvas = document.getElementById('pathfinding') as HTMLCanvasElement
     canvas.width = max + 1
     canvas.height = max + 1
-    resetCanvas(canvas)
+    resetCanvas()
 })
 
 watch([tick, algorithm, geometry, strength], () => {
@@ -111,7 +112,11 @@ watch([tick, algorithm, geometry, strength], () => {
     pathfind(canvas)
 })
 
-const resetCanvas = (canvas: HTMLCanvasElement) => {
+const resetCanvas = () => {
+    clearCurrentInterval()
+
+    const canvas = document.getElementById('pathfinding') as HTMLCanvasElement
+
     cells = Array.from({ length: res.value }, () => Array.from({ length: res.value }, () => null))
 
     const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
@@ -124,6 +129,33 @@ const resetCanvas = (canvas: HTMLCanvasElement) => {
             cells[x][y].draw(ctx, cellSize)
         }
     }
+}
+
+const randomizeCanvas = () => {
+    const canvas = document.getElementById('pathfinding') as HTMLCanvasElement
+    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
+
+    clearCurrentInterval()
+    clearSearch(canvas)
+
+    for (let i = 0; i < res.value; i++) {
+        for (let j = 0; j < res.value; j++) {
+            cells[i][j].state = Math.random() < 0.3 ? 'gray' : 'black'
+            cells[i][j].draw(ctx, cellSize)
+        }
+    }
+
+    let randomIndex1 = Math.floor(Math.random() * res.value);
+    let randomIndex2 = Math.floor(Math.random() * res.value);
+    cells[randomIndex1][randomIndex2].state = 'blue';
+    cells[randomIndex1][randomIndex2].draw(ctx, cellSize)
+
+    randomIndex1 = Math.floor(Math.random() * res.value);
+    randomIndex2 = Math.floor(Math.random() * res.value);
+    cells[randomIndex1][randomIndex2].state = 'red';
+    cells[randomIndex1][randomIndex2].draw(ctx, cellSize)
+
+    pathfind(canvas)
 }
 
 const pathfind = (canvas: HTMLCanvasElement) => {
@@ -286,12 +318,14 @@ onUnmounted(() => {
             <ButtonToggle value="blue" text="Start" v-model="cellColor" />
             <ButtonToggle value="red" text="End" v-model="cellColor" />
             <ButtonToggle value="black" text="Empty" v-model="cellColor" />
+            <button @click="randomizeCanvas" class="p-2 border border-white">🎲</button>
+            <button @click="resetCanvas" class="p-2 border border-white">🗑️</button>
         </div>
 
         <div class="flex flex-row flex-wrap gap-2 justify-center" v-if="menu === 'settings'">
             <div class="flex flex-col">
                 <span>Resolution</span>
-                <input type="range" min="5" max="30" v-model="res" />
+                <input type="range" min="5" max="50" v-model="res" />
             </div>
             <div class="flex flex-col">
                 <span>Speed</span>
