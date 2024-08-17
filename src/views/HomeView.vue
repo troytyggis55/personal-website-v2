@@ -15,14 +15,14 @@ const showDemo = ref(true)
                 <MarkdownRenderer filename="AboutMe" />
                 <br />
                 <ContainerCarousel>
-                    <li class="glide__slide items-center">
-                        <img src="/images/aboutme/hs.jpg" alt="Image 1" />
+                    <li class="glide__slide items-center flex justify-center">
+                        <img src="/images/aboutme/hs.jpg" alt="Hovedstyret" class="max-h-96" />
                     </li>
-                    <li class="glide__slide items-center">
-                        <img src="/images/aboutme/hs.jpg" alt="Image 2" />
-                    </li>
-                    <li class="glide__slide items-center">
-                        <img src="/images/aboutme/hs.jpg" alt="Image 3" />
+                    <li class="glide__slide items-center flex justify-center">
+                        <img src="/images/aboutme/snowboard.jpeg" alt="Snowboard" class="max-h-96"/>
+                        </li>
+                    <li class="glide__slide items-center flex justify-center">
+                        <img src="/images/aboutme/vargalla.jpg " alt="Vårgalla" class="max-h-96" />
                     </li>
                 </ContainerCarousel>
             </ContainerCard>

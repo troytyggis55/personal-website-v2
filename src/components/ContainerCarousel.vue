@@ -33,9 +33,11 @@ import { onMounted } from 'vue'
 
 onMounted(() => {
     new Glide('.glide', {
-        peek: 20
+        peek: 20,
+        perView: 2,
+        bound: true,
     }).mount()
 })
 </script>
 
-<style scoped></style>
+<style></style>
