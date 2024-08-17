@@ -1,10 +1,25 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import DemoNetwork from '@/components/DemoNetwork.vue'
+
+import { useSessionStore } from './stores/session'
+import { ref, watch } from 'vue'
+import ButtonEffects from '@/components/ButtonEffects.vue'
+
+const store = useSessionStore()
+let state = ref(store.showEffects)
+
+watch(() => store.showEffects, (newVal) => {
+    state.value = newVal
+}, { immediate: true })
+</script>
 
 <template>
+    <DemoNetwork v-if="state" />
+    <ButtonEffects />
+
     <header class="flex justify-between mb-4 gap-4">
-        <router-link to="/"
-                     class="mt-auto mb-auto justify-center">
-            <h1 class="text-3xl sm:text-5xl text-white">Trygve Jørgensen</h1>
+        <router-link to="/" class="mt-auto mb-auto justify-center">
+            <h1 class="text-3xl sm:text-5xl text-white hover-glow">Trygve Jørgensen</h1>
         </router-link>
         <img
             src="../images/KvadratProfilbilde.jpeg"
@@ -26,13 +41,21 @@
         </div>
         <div class="flex gap-2 justify-center">
             <a href="https://github.com/troytyggis55" target="”_blank”">
-                <img src="/src/svg/github.svg" alt="Github Logo" class="h-fit max-h-10 hover-glow" />
+                <img
+                    src="/src/svg/github.svg"
+                    alt="Github Logo"
+                    class="h-fit max-h-10 hover-glow"
+                />
             </a>
             <a
                 href="https://www.linkedin.com/in/trygve-j%C3%B8rgensen-80b1b9259/"
                 target="”_blank”"
             >
-                <img src="/src/svg/linkedin.svg" alt="LinkedIn Logo" class="h-fit max-h-10 hover-glow" />
+                <img
+                    src="/src/svg/linkedin.svg"
+                    alt="LinkedIn Logo"
+                    class="h-fit max-h-10 hover-glow"
+                />
             </a>
         </div>
     </footer>

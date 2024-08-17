@@ -3,10 +3,15 @@ import { ref } from 'vue'
 
 export const useSessionStore = defineStore('session', () => {
     const language = ref('no')
+    const showEffects = ref(true)
 
     function toggleLanguage() {
         language.value = language.value === 'no' ? 'en' : 'no'
     }
 
-    return { language, toggleLanguage }
+    function toggleEffects() {
+        showEffects.value = !showEffects.value
+    }
+
+    return { showEffects, toggleEffects, language, toggleLanguage }
 })

@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import MarkdownIt from 'markdown-it'
 import frontmatter from 'front-matter'
 import { useSessionStore } from '@/stores/session'

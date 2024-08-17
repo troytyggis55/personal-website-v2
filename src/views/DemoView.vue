@@ -3,7 +3,7 @@
         <h2>Programming Demos</h2>
 
         <ContainerCard>
-            <div class="flex flex-row gap-4" :class="{ 'flex-col': isMediumScreen }">
+            <div class="flex flex-row gap-6" :class="{ 'flex-col': isMediumScreen }">
                 <select v-if="isMediumScreen" v-model="selectedDemo">
                     <option v-for="demo in demos" :key="demo.name" :value="demo.path">
                         {{ demo.name }}
@@ -15,7 +15,7 @@
                         :key="demo.name"
                         @click="selectedDemo = demo.path"
                         :class="{ 'bg-blue-400': selectedDemo === demo.path }"
-                        class="p-2 cursor-pointer"
+                        class="p-4 cursor-pointer text-lg"
                     >
                         {{ demo.name }}
                     </div>
