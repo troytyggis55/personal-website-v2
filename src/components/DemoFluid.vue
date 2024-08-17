@@ -182,13 +182,12 @@ onUnmounted(() => {
 
 <template>
     <h2>Fluid Simulation</h2>
-    <div class="flex flex-row flex-wrap gap-5  justify-center w-full">
+    <div class="flex flex-row flex-wrap gap-5 justify-center w-full">
         <div class="flex flex-col gap-4 min-w-60">
             <div class="flex flex-row flex-wrap gap-2 justify-center">
                 <ButtonToggle value="create" text="Create" v-model="clickType" />
                 <ButtonToggle value="delete" text="Delete" v-model="clickType" />
-                <button @click="clearNodes" class="border border-white p-2">
-                    Clear</button>
+                <button @click="clearNodes" class="border border-white p-2">Clear</button>
             </div>
             <div class="flex flex-col">
                 <span>Search Radius {{ searchRadius.toFixed(2) }}</span>

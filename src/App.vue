@@ -8,9 +8,13 @@ import ButtonNetwork from '@/components/ButtonNetwork.vue'
 const store = useSessionStore()
 let state = ref(store.showEffects)
 
-watch(() => store.showEffects, (newVal) => {
-    state.value = newVal
-}, { immediate: true })
+watch(
+    () => store.showEffects,
+    newVal => {
+        state.value = newVal
+    },
+    { immediate: true }
+)
 </script>
 
 <template>
@@ -64,11 +68,13 @@ watch(() => store.showEffects, (newVal) => {
 </template>
 
 <style scoped>
-.network-enter-active, .network-leave-active {
+.network-enter-active,
+.network-leave-active {
     transition: 0.5s;
 }
 
-.network-enter-from, .network-leave-to {
+.network-enter-from,
+.network-leave-to {
     opacity: 0;
 }
 </style>

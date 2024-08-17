@@ -19,8 +19,12 @@ const showDemo = ref(true)
                         <img src="/images/aboutme/hs.jpg" alt="Hovedstyret" class="max-h-96" />
                     </li>
                     <li class="glide__slide items-center flex justify-center">
-                        <img src="/images/aboutme/snowboard.jpeg" alt="Snowboard" class="max-h-96"/>
-                        </li>
+                        <img
+                            src="/images/aboutme/snowboard.jpeg"
+                            alt="Snowboard"
+                            class="max-h-96"
+                        />
+                    </li>
                     <li class="glide__slide items-center flex justify-center">
                         <img src="/images/aboutme/vargalla.jpg " alt="Vårgalla" class="max-h-96" />
                     </li>
@@ -56,10 +60,18 @@ const showDemo = ref(true)
         <ContainerCard>
             <h2>Skills</h2>
             <div class="flex flex-row flex-wrap gap-10 xl:gap-32 justify-center pb-10">
-                <img class="h-20 md:h-40 hover-glow" src="/src/svg/java.svg" alt="Java Logo"
-                     title="Java" />
-                <img class="h-20 md:h-40 hover-glow" src="/src/svg/cpp.svg" alt="C++ Logo"
-                     title="C++" />
+                <img
+                    class="h-20 md:h-40 hover-glow"
+                    src="/src/svg/java.svg"
+                    alt="Java Logo"
+                    title="Java"
+                />
+                <img
+                    class="h-20 md:h-40 hover-glow"
+                    src="/src/svg/cpp.svg"
+                    alt="C++ Logo"
+                    title="C++"
+                />
                 <img
                     class="h-20 md:h-40 hover-glow"
                     src="/src/svg/python.svg"
@@ -72,7 +84,8 @@ const showDemo = ref(true)
                     alt="JavaScript Logo"
                     title="JavaScript"
                 />
-                <img src="/src/svg/typescript.svg"
+                <img
+                    src="/src/svg/typescript.svg"
                     alt="TypeScript Logo"
                     title="TypeScript"
                     class="h-20 md:h-40 hover-glow"
@@ -83,7 +96,12 @@ const showDemo = ref(true)
                     alt="Vue.js Logo"
                     title="Vue.js"
                 />
-                <img class="h-20 md:h-40 hover-glow" src="/src/svg/mysql.svg" alt="MySQL Logo" title="MySQL" />
+                <img
+                    class="h-20 md:h-40 hover-glow"
+                    src="/src/svg/mysql.svg"
+                    alt="MySQL Logo"
+                    title="MySQL"
+                />
             </div>
         </ContainerCard>
     </main>

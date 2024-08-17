@@ -5,7 +5,7 @@ import MarkdownRenderer from '@/components/MarkdownRenderer.vue'
 
 <template>
     <DemoFluid />
-    <br>
+    <br />
     <MarkdownRenderer filename="Fluid" />
 </template>
 

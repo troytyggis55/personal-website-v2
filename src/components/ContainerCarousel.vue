@@ -35,7 +35,7 @@ onMounted(() => {
     new Glide('.glide', {
         peek: 20,
         perView: 2,
-        bound: true,
+        bound: true
     }).mount()
 })
 </script>

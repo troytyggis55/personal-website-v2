@@ -145,14 +145,14 @@ const randomizeCanvas = () => {
         }
     }
 
-    let randomIndex1 = Math.floor(Math.random() * res.value);
-    let randomIndex2 = Math.floor(Math.random() * res.value);
-    cells[randomIndex1][randomIndex2].state = 'blue';
+    let randomIndex1 = Math.floor(Math.random() * res.value)
+    let randomIndex2 = Math.floor(Math.random() * res.value)
+    cells[randomIndex1][randomIndex2].state = 'blue'
     cells[randomIndex1][randomIndex2].draw(ctx, cellSize)
 
-    randomIndex1 = Math.floor(Math.random() * res.value);
-    randomIndex2 = Math.floor(Math.random() * res.value);
-    cells[randomIndex1][randomIndex2].state = 'red';
+    randomIndex1 = Math.floor(Math.random() * res.value)
+    randomIndex2 = Math.floor(Math.random() * res.value)
+    cells[randomIndex1][randomIndex2].state = 'red'
     cells[randomIndex1][randomIndex2].draw(ctx, cellSize)
 
     pathfind(canvas)
@@ -307,7 +307,7 @@ onUnmounted(() => {
 
 <template>
     <div class="flex flex-col gap-3">
-    <h2>Pathfinding</h2>
+        <h2>Pathfinding</h2>
         <div class="flex flex-row gap-2 justify-center">
             <ButtonToggle text="Layout" value="layout" v-model="menu" />
             <ButtonToggle text="Algorithm" value="algo" v-model="menu" />
