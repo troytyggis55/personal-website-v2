@@ -120,7 +120,7 @@ const resetCanvas = () => {
     cells = Array.from({ length: res.value }, () => Array.from({ length: res.value }, () => null))
 
     const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
-    ctx.fillStyle = 'white'
+    ctx.fillStyle = 'rgb(70,70,70)'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
     for (let x = 0; x < res.value; x++) {
@@ -251,7 +251,7 @@ const clearSearch = (canvas: HTMLCanvasElement) => {
     distance.value = 0
 
     const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
-    ctx.fillStyle = 'white'
+    ctx.fillStyle = 'rgb(70,70,70)'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
     for (let i = 0; i < res.value; i++) {
