@@ -1,14 +1,28 @@
 <template>
     <main class="flex flex-col gap-4">
         <h2>Programming Demos</h2>
-        <select v-if="isMediumScreen" v-model="selectedDemo">
-            <option v-for="demo in demos" :key="demo.name" :value="demo.path">
-                {{ demo.name }}
-            </option>
-        </select>
-        <div class="flex flex-col max-w-sm" v-else></div>
 
-        <router-view />
+        <div class="flex flex-row gap-4">
+            <select v-if="isMediumScreen" v-model="selectedDemo">
+                <option v-for="demo in demos" :key="demo.name" :value="demo.path">
+                    {{ demo.name }}
+                </option>
+            </select>
+            <div class="flex flex-col min-w-48 border border-blue-400" v-else>
+                <div
+                    v-for="demo in demos"
+                    :key="demo.name"
+                    @click="selectedDemo = demo.path"
+                    :class="{ 'bg-blue-400': selectedDemo === demo.path }"
+                    class="p-2 cursor-pointer"
+                >
+                    {{ demo.name }}
+                </div>
+            </div>
+            <div class="flex flex-col">
+                <router-view />
+            </div>
+        </div>
     </main>
 </template>
 
@@ -27,8 +41,8 @@ const demos = [
     }
 ]
 
-const selectedDemo = ref(demos[0].path)
 const router = useRouter()
+const selectedDemo = ref()
 
 watch(selectedDemo, newDemoPath => {
     router.push({ path: newDemoPath })
@@ -40,5 +54,8 @@ onMounted(() => {
     window.addEventListener('resize', () => {
         isMediumScreen.value = window.innerWidth < 768
     })
+
+    selectedDemo.value = router.currentRoute.value.name
+    console.log(selectedDemo.value)
 })
 </script>

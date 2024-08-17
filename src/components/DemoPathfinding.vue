@@ -66,8 +66,7 @@ onMounted(() => {
             if (e instanceof MouseEvent) {
                 setCellByPixel(canvas, e.clientX, e.clientY, cellColor.value)
             } else {
-                setCellByPixel(canvas, e.touches[0].clientX, e.touches[0].clientY,
-                    cellColor.value)
+                setCellByPixel(canvas, e.touches[0].clientX, e.touches[0].clientY, cellColor.value)
             }
         }
     }
