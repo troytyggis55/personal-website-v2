@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,14 +6,16 @@ const router = createRouter({
         {
             path: '/',
             name: 'home',
-            component: HomeView
+            component: () => import('../views/HomeView.vue')
         },
         {
             path: '/demo',
             name: 'demo',
             component: () => import('../views/DemoView.vue'),
+            redirect: '/demo/pathfinding',
             children: [
                 {
+                    default: true,
                     path: ':pathfinding',
                     name: 'pathfinding',
                     component: () => import('../views/demos/PathfindingView.vue')
@@ -25,6 +26,11 @@ const router = createRouter({
                     component: () => import('../views/demos/FluidView.vue')
                 }
             ]
+        },
+        {
+            path: '/:catchAll(.*)',
+            name: 'not-found',
+            component: () => import('../views/NotFoundView.vue')
         }
     ]
 })
