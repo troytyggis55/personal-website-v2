@@ -55,21 +55,35 @@ const showDemo = ref(true)
         </div>
         <ContainerCard>
             <h2>Skills</h2>
-            <div class="flex flex-row flex-wrap gap-10 justify-center">
-                <img class="h-40 hover-glow" src="/src/svg/java.svg" alt="Java Logo" title="Java" />
+            <div class="flex flex-row flex-wrap gap-10 xl:gap-32 justify-center pb-10">
+                <img class="h-20 md:h-40 hover-glow" src="/src/svg/java.svg" alt="Java Logo"
+                     title="Java" />
+                <img class="h-20 md:h-40 hover-glow" src="/src/svg/cpp.svg" alt="C++ Logo"
+                     title="C++" />
                 <img
-                    class="h-40 hover-glow"
+                    class="h-20 md:h-40 hover-glow"
                     src="/src/svg/python.svg"
                     alt="Python Logo"
                     title="Python"
                 />
                 <img
-                    class="h-40 hover-glow"
+                    class="h-20 md:h-40 hover-glow"
                     src="/src/svg/javascript.svg"
                     alt="JavaScript Logo"
                     title="JavaScript"
                 />
-                <img class="h-40 hover-glow" src="/src/svg/cpp.svg" alt="C++ Logo" title="C++" />
+                <img src="/src/svg/typescript.svg"
+                    alt="TypeScript Logo"
+                    title="TypeScript"
+                    class="h-20 md:h-40 hover-glow"
+                />
+                <img
+                    class="h-20 md:h-40 hover-glow"
+                    src="/src/svg/vue.svg"
+                    alt="Vue.js Logo"
+                    title="Vue.js"
+                />
+                <img class="h-20 md:h-40 hover-glow" src="/src/svg/mysql.svg" alt="MySQL Logo" title="MySQL" />
             </div>
         </ContainerCard>
     </main>

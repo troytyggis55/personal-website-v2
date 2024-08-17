@@ -33,7 +33,7 @@ watch(() => store.showEffects, (newVal) => {
     <RouterView />
 
     <footer
-        class="mt-5 pt-5 pb-5 border-t border-gray-300 text-center flex flex-row items-center justify-center gap-4"
+        class="mt-5 pt-5 pb-20 border-t border-gray-300 text-center flex flex-row items-center justify-center gap-4"
     >
         <div class="flex flex-col text-right">
             <p class="leading-none">+47 94 05 05 56</p>
