@@ -31,7 +31,7 @@ interface FrontMatter {
     category?: string
 }
 
-const filepath = `../markdown/${useSessionStore().language}/${props.filename}.md`
+const filepath = `/markdown/${useSessionStore().language}/${props.filename}.md`
 
 const markdown = new MarkdownIt()
 const markdownContent = ref('')
@@ -93,7 +93,6 @@ onMounted(() => {
     background-color: #383096;
     color: #7ebfff;
     padding: 10px;
-    border-radius: 10px;
     overflow-x: scroll;
 }
 
@@ -106,7 +105,6 @@ onMounted(() => {
 }
 
 #md pre::-webkit-scrollbar-thumb {
-    border-radius: 10px;
     background: #7769dd;
 }
 </style>

@@ -5,7 +5,10 @@ import MarkdownRenderer from '@/components/MarkdownRenderer.vue'
 
 <template>
     <div class="flex flex-row flex-wrap gap-6">
-        <DemoPathfinding />
+        <div class="flex flex-col">
+            <h2>Pathfinding</h2>
+            <DemoPathfinding />
+        </div>
         <div class="flex flex-col lg:max-w-md justify-center">
             <MarkdownRenderer filename="Pathfinding" />
         </div>

@@ -181,7 +181,6 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <h2>Fluid Simulation</h2>
     <div class="flex flex-row flex-wrap gap-5 justify-center w-full">
         <div class="flex flex-col gap-4 min-w-60">
             <div class="flex flex-row flex-wrap gap-2 justify-center">

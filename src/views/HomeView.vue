@@ -31,6 +31,7 @@ const showDemo = ref(true)
                 </ContainerCarousel>
             </ContainerCard>
             <ContainerCard class="md:max-w-md w-full">
+                <h2>Pathfinding</h2>
                 <DemoPathfinding v-if="showDemo" />
                 <button
                     v-else
