@@ -2,7 +2,6 @@
 import MarkdownRenderer from '@/components/MarkdownRenderer.vue'
 import ContainerCard from '@/components/ContainerCard.vue'
 import DemoPathfinding from '@/components/DemoPathfinding.vue'
-import ContainerCarousel from '@/components/ContainerCarousel.vue'
 import { ref } from 'vue'
 
 const showDemo = ref(true)
@@ -10,103 +9,190 @@ const showDemo = ref(true)
 
 <template>
     <main class="flex flex-col gap-6">
-        <div class="flex flex-col md:flex-row gap-6 justify-center">
+        <!-- Row 1: Bio + Demo -->
+        <div class="flex flex-col md:flex-row gap-6">
             <ContainerCard>
+                <h3 class="section-label">Om meg</h3>
                 <MarkdownRenderer filename="AboutMe" />
-                <br />
-                <ContainerCarousel>
-                    <li class="glide__slide items-center flex justify-center">
-                        <img src="/images/aboutme/hs.jpg" alt="Hovedstyret" class="max-h-96" />
-                    </li>
-                    <li class="glide__slide items-center flex justify-center">
-                        <img
-                            src="/images/aboutme/snowboard.jpeg"
-                            alt="Snowboard"
-                            class="max-h-96"
-                        />
-                    </li>
-                    <li class="glide__slide items-center flex justify-center">
-                        <img src="/images/aboutme/vargalla.jpg " alt="Vårgalla" class="max-h-96" />
-                    </li>
-                </ContainerCarousel>
+
+                <div class="mt-6 flex flex-col gap-4">
+                    <div class="experience-entry">
+                        <div class="entry-header">
+                            <span class="entry-title">Bekk</span>
+                            <span class="entry-tag">Sommerjobb 2025</span>
+                        </div>
+                        <p class="entry-desc">Konsulent — backend og systemutvikling.</p>
+                    </div>
+
+                    <div class="experience-entry">
+                        <div class="entry-header">
+                            <a
+                                href="https://tihlde.org"
+                                target="_blank"
+                                class="entry-title link-accent"
+                                >TIHLDE</a
+                            >
+                            <span class="entry-tag">Leder 2024/25</span>
+                        </div>
+                        <p class="entry-desc">
+                            Leder for linjeforeningen for informatikk- og datastudenter ved NTNU,
+                            med over 700 medlemmer.
+                        </p>
+                    </div>
+                </div>
             </ContainerCard>
+
             <ContainerCard class="md:max-w-md w-full">
-                <h2>Pathfinding</h2>
+                <h3 class="section-label">Pathleting-demo</h3>
                 <DemoPathfinding v-if="showDemo" />
                 <button
                     v-else
                     @click="showDemo = true"
-                    class="text-5xl w-full h-full min-h-56 text-white border-white border hover:bg-blue-500 transition"
+                    class="text-5xl w-full h-full min-h-56 text-white border border-white/30 hover:bg-white/10 transition rounded"
                 >
-                    Start Demo
+                    Start demo
                 </button>
 
-                <br />
-                <div class="flex justify-center gap-2" v-if="showDemo">
+                <div class="mt-4 flex justify-center gap-2" v-if="showDemo">
                     <button
-                        class="p-3 text-white border-white border hover:bg-blue-500 transition"
+                        class="px-4 py-2 text-sm text-white border border-white/30 hover:bg-white/10 transition rounded"
                         @click="showDemo = false"
                     >
-                        Stop Demo
+                        Stopp
                     </button>
                     <router-link
                         to="/demo/pathfinding"
-                        class="p-3 text-white border-white border hover:bg-blue-500 transition appearance-none"
+                        class="px-4 py-2 text-sm text-white border border-white/30 hover:bg-white/10 transition rounded"
                     >
-                        <button>More Demos</button>
+                        Flere demoer
                     </router-link>
                 </div>
             </ContainerCard>
         </div>
+
+        <!-- Row 2: Projects -->
         <ContainerCard>
-            <h2>Skills</h2>
-            <div class="flex flex-row flex-wrap gap-10 xl:gap-32 justify-center pb-10">
-                <img
-                    class="h-20 md:h-40 hover-glow"
-                    src="/src/svg/java.svg"
-                    alt="Java Logo"
-                    title="Java"
-                />
-                <img
-                    class="h-20 md:h-40 hover-glow"
-                    src="/src/svg/cpp.svg"
-                    alt="C++ Logo"
-                    title="C++"
-                />
-                <img
-                    class="h-20 md:h-40 hover-glow"
-                    src="/src/svg/python.svg"
-                    alt="Python Logo"
-                    title="Python"
-                />
-                <img
-                    class="h-20 md:h-40 hover-glow"
-                    src="/src/svg/javascript.svg"
-                    alt="JavaScript Logo"
-                    title="JavaScript"
-                />
-                <img
-                    src="/src/svg/typescript.svg"
-                    alt="TypeScript Logo"
-                    title="TypeScript"
-                    class="h-20 md:h-40 hover-glow"
-                />
-                <img
-                    class="h-20 md:h-40 hover-glow"
-                    src="/src/svg/vue.svg"
-                    alt="Vue.js Logo"
-                    title="Vue.js"
-                />
-                <img
-                    class="h-20 md:h-40 hover-glow"
-                    src="/src/svg/mysql.svg"
-                    alt="MySQL Logo"
-                    title="MySQL"
-                />
-            </div>
+            <h3 class="section-label">Prosjekter</h3>
+            <a href="https://chatssb.no" target="_blank" class="project-card group">
+                <div class="project-card-inner">
+                    <div class="flex items-center gap-3">
+                        <span class="project-title">ChatSSB.no</span>
+                        <span class="project-arrow">↗</span>
+                    </div>
+                    <p class="project-desc">
+                        Gjør SSBs åpne data dramatisk mer tilgjengelig — kombinerer et chat-grensesnitt
+                        med SSBs API slik at hvem som helst kan utforske norsk statistikk uten teknisk
+                        forkunnskaper.
+                    </p>
+                    <div class="flex gap-2 mt-3 flex-wrap">
+                        <span class="tech-tag">Fullstack</span>
+                        <span class="tech-tag">API-integrasjon</span>
+                        <span class="tech-tag">AI</span>
+                    </div>
+                </div>
+            </a>
         </ContainerCard>
     </main>
 </template>
+
+<style scoped>
+.section-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 0.75rem;
+}
+
+.experience-entry {
+    padding: 0.875rem 1rem;
+    border-left: 2px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 0 6px 6px 0;
+}
+
+.entry-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 0.25rem;
+}
+
+.entry-title {
+    font-weight: 700;
+    font-size: 1rem;
+    color: white;
+}
+
+.link-accent:hover {
+    color: var(--color-accent);
+}
+
+.entry-tag {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.45);
+    font-weight: 500;
+}
+
+.entry-desc {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+}
+
+.project-card {
+    display: block;
+    text-decoration: none;
+}
+
+.project-card-inner {
+    padding: 1.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.project-card:hover .project-card-inner {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.project-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: white;
+}
+
+.project-arrow {
+    font-size: 1.1rem;
+    color: var(--color-accent);
+    transition: transform 0.2s;
+}
+
+.project-card:hover .project-arrow {
+    transform: translate(2px, -2px);
+}
+
+.project-desc {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    margin-top: 0.4rem;
+}
+
+.tech-tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    background: rgba(66, 184, 131, 0.15);
+    color: var(--color-accent);
+    border: 1px solid rgba(66, 184, 131, 0.3);
+}
+</style>
 
 <style>
 .hover-glow {

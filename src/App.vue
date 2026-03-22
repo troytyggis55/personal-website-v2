@@ -19,49 +19,45 @@ watch(
 
 <template>
     <Transition name="network">
-        <DemoNetwork v-if="state" class="" />
+        <DemoNetwork v-if="state" />
     </Transition>
     <ButtonNetwork />
 
-    <header class="flex justify-between mb-4 gap-4">
-        <router-link to="/" class="mt-auto mb-auto justify-center">
-            <h1 class="text-3xl sm:text-5xl text-white hover-glow">Trygve Jørgensen</h1>
+    <header class="flex justify-between items-center mb-8 gap-4">
+        <router-link to="/" class="flex flex-col gap-0.5">
+            <h1 class="text-3xl sm:text-5xl text-white hover-glow leading-tight">
+                Trygve Jørgensen
+            </h1>
+            <p class="text-sm text-white/50 tracking-wide">Masterstudent · NTNU</p>
         </router-link>
         <img
             src="/images/KvadratProfilbilde.jpeg"
-            alt="Profile picture"
-            class="rounded-full shadow-xl size-20 sm:size-28"
+            alt="Profilbilde"
+            class="rounded-full shadow-xl size-20 sm:size-24 ring-2 ring-white/10"
         />
     </header>
 
     <RouterView />
 
     <footer
-        class="mt-5 pt-5 pb-20 border-t border-gray-300 text-center flex flex-row items-center justify-center gap-4"
+        class="mt-8 pt-6 pb-16 border-t border-white/10 flex flex-row items-center justify-center gap-5"
     >
-        <div class="flex flex-col text-right">
-            <p class="leading-none">+47 94 05 05 56</p>
-            <a href="mailito:trygveabjo@gmail.com"
-                ><p class="leading-none">trygveabjo@gmail.com</p></a
+        <div class="flex flex-col text-right text-sm text-white/60">
+            <p class="leading-snug">+47 94 05 05 56</p>
+            <a href="mailto:trygveabjo@gmail.com" class="leading-snug hover:text-white transition"
+                >trygveabjo@gmail.com</a
             >
         </div>
-        <div class="flex gap-2 justify-center">
-            <a href="https://github.com/troytyggis55" target="”_blank”">
-                <img
-                    src="/src/svg/github.svg"
-                    alt="Github Logo"
-                    class="h-fit max-h-10 hover-glow"
-                />
+        <div class="flex gap-3">
+            <a href="https://github.com/troytyggis55" target="_blank" class="hover-glow">
+                <img src="/src/svg/github.svg" alt="GitHub" class="h-8 opacity-80" />
             </a>
             <a
                 href="https://www.linkedin.com/in/trygve-j%C3%B8rgensen-80b1b9259/"
-                target="”_blank”"
+                target="_blank"
+                class="hover-glow"
             >
-                <img
-                    src="/src/svg/linkedin.svg"
-                    alt="LinkedIn Logo"
-                    class="h-fit max-h-10 hover-glow"
-                />
+                <img src="/src/svg/linkedin.svg" alt="LinkedIn" class="h-8 opacity-80" />
             </a>
         </div>
     </footer>
