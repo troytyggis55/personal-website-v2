@@ -9,24 +9,6 @@ const router = createRouter({
             component: () => import('../views/HomeView.vue')
         },
         {
-            path: '/demo',
-            name: 'demo',
-            component: () => import('../views/DemoView.vue'),
-            redirect: '/demo/pathfinding',
-            children: [
-                {
-                    path: ':pathfinding',
-                    name: 'pathfinding',
-                    component: () => import('../views/demos/PathfindingView.vue')
-                },
-                {
-                    path: ':fluid-simulation',
-                    name: 'fluid-simulation',
-                    component: () => import('../views/demos/FluidView.vue')
-                }
-            ]
-        },
-        {
             path: '/:catchAll(.*)',
             name: 'not-found',
             component: () => import('../views/NotFoundView.vue')

@@ -1,76 +1,122 @@
 <script setup lang="ts">
 import DemoNetwork from '@/components/DemoNetwork.vue'
-
-import { useSessionStore } from './stores/session'
-import { ref, watch } from 'vue'
-import ButtonNetwork from '@/components/ButtonNetwork.vue'
-
-const store = useSessionStore()
-let state = ref(store.showEffects)
-
-watch(
-    () => store.showEffects,
-    newVal => {
-        state.value = newVal
-    },
-    { immediate: true }
-)
 </script>
 
 <template>
-    <Transition name="network">
-        <DemoNetwork v-if="state" />
-    </Transition>
-    <ButtonNetwork />
+    <DemoNetwork />
 
-    <header class="flex justify-between items-center mb-8 gap-4">
-        <router-link to="/" class="flex flex-col gap-0.5">
-            <h1 class="text-3xl sm:text-5xl text-white hover-glow leading-tight">
-                Trygve Jørgensen
-            </h1>
-            <p class="text-sm text-white/50 tracking-wide">Masterstudent · NTNU</p>
+    <header class="site-header">
+        <router-link to="/" class="header-name-link">
+            <span class="header-name">Trygve Jørgensen</span>
         </router-link>
         <img
             src="/images/KvadratProfilbilde.jpeg"
             alt="Profilbilde"
-            class="rounded-full shadow-xl size-20 sm:size-24 ring-2 ring-white/10"
+            class="header-photo"
         />
     </header>
 
     <RouterView />
 
-    <footer
-        class="mt-8 pt-6 pb-16 border-t border-white/10 flex flex-row items-center justify-center gap-5"
-    >
-        <div class="flex flex-col text-right text-sm text-white/60">
-            <p class="leading-snug">+47 94 05 05 56</p>
-            <a href="mailto:trygveabjo@gmail.com" class="leading-snug hover:text-white transition"
-                >trygveabjo@gmail.com</a
-            >
+    <footer class="site-footer">
+        <div class="footer-contact">
+            <p>+47 94 05 05 56</p>
+            <a href="mailto:trygveabjo@gmail.com">trygveabjo@gmail.com</a>
         </div>
-        <div class="flex gap-3">
+        <div class="footer-icons">
             <a href="https://github.com/troytyggis55" target="_blank" class="hover-glow">
-                <img src="/src/svg/github.svg" alt="GitHub" class="h-8 opacity-80" />
+                <img src="/src/svg/github.svg" alt="GitHub" class="footer-icon" />
             </a>
             <a
                 href="https://www.linkedin.com/in/trygve-j%C3%B8rgensen-80b1b9259/"
                 target="_blank"
                 class="hover-glow"
             >
-                <img src="/src/svg/linkedin.svg" alt="LinkedIn" class="h-8 opacity-80" />
+                <img src="/src/svg/linkedin.svg" alt="LinkedIn" class="footer-icon" />
             </a>
         </div>
     </footer>
 </template>
 
 <style scoped>
-.network-enter-active,
-.network-leave-active {
-    transition: 0.5s;
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--color-border);
 }
 
-.network-enter-from,
-.network-leave-to {
-    opacity: 0;
+.header-name-link {
+    text-decoration: none;
+}
+
+.header-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.9rem, 5vw, 3.2rem);
+    font-weight: 900;
+    color: var(--color-fg);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.header-name-link:hover .header-name {
+    color: white;
+}
+
+.header-photo {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    flex-shrink: 0;
+}
+
+@media (min-width: 640px) {
+    .header-photo {
+        width: 5rem;
+        height: 5rem;
+    }
+}
+
+.site-footer {
+    margin-top: 6rem;
+    padding-top: 1.75rem;
+    padding-bottom: 4rem;
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.footer-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.1rem;
+    font-size: 0.8rem;
+    color: rgba(230, 226, 217, 0.35);
+}
+
+.footer-contact a:hover {
+    color: var(--color-fg);
+}
+
+.footer-icons {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.footer-icon {
+    height: 1.75rem;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+
+.footer-icons a:hover .footer-icon {
+    opacity: 0.9;
 }
 </style>

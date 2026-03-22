@@ -3,6 +3,10 @@ import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import ButtonToggle from '@/components/ButtonToggle.vue'
 import Node from '../demos/pathfinding'
 
+const props = defineProps({
+    showControls: { type: Boolean, default: true }
+})
+
 const max = 500
 const res = ref(50)
 const cellSize = computed(() => max / res.value)
@@ -307,56 +311,52 @@ onUnmounted(() => {
 
 <template>
     <div class="flex flex-col gap-3 justify-center items-center">
-        <div class="flex flex-row gap-2 justify-center">
-            <ButtonToggle text="Layout" value="layout" v-model="menu" />
-            <ButtonToggle text="Algorithm" value="algo" v-model="menu" />
-            <ButtonToggle text="Settings" value="settings" v-model="menu" />
-        </div>
-        <div class="flex flex-row flex-wrap gap-2 justify-center" v-if="menu === 'layout'">
-            <ButtonToggle value="gray" text="Wall" v-model="cellColor" />
-            <ButtonToggle value="blue" text="Start" v-model="cellColor" />
-            <ButtonToggle value="red" text="End" v-model="cellColor" />
-            <ButtonToggle value="black" text="Empty" v-model="cellColor" />
-            <button @click="randomizeCanvas" class="p-2 border border-white">🎲</button>
-            <button @click="resetCanvas" class="p-2 border border-white">🗑️</button>
-        </div>
-
-        <div class="flex flex-row flex-wrap gap-2 justify-center" v-if="menu === 'settings'">
-            <div class="flex flex-col">
-                <span>Resolution</span>
-                <input type="range" min="5" max="50" v-model="res" />
+        <template v-if="showControls">
+            <div class="flex flex-row gap-2 justify-center">
+                <ButtonToggle text="Layout" value="layout" v-model="menu" />
+                <ButtonToggle text="Algoritme" value="algo" v-model="menu" />
+                <ButtonToggle text="Innstillinger" value="settings" v-model="menu" />
             </div>
-            <div class="flex flex-col">
-                <span>Speed</span>
-                <input type="range" min="1" max="200" v-model="tick" />
+            <div class="flex flex-row flex-wrap gap-2 justify-center" v-if="menu === 'layout'">
+                <ButtonToggle value="gray" text="Vegg" v-model="cellColor" />
+                <ButtonToggle value="blue" text="Start" v-model="cellColor" />
+                <ButtonToggle value="red" text="Slutt" v-model="cellColor" />
+                <ButtonToggle value="black" text="Tom" v-model="cellColor" />
+                <button @click="randomizeCanvas" class="p-2 border border-white/30">🎲</button>
+                <button @click="resetCanvas" class="p-2 border border-white/30">🗑️</button>
             </div>
-        </div>
-
-        <div class="flex flex-row flex-wrap gap-2 justify-center" v-if="menu === 'algo'">
-            <select v-model="geometry">
-                <option value="manhatten" selected>Manhatten</option>
-                <option value="euclidean">Euclidean</option>
-            </select>
-            <select v-model="algorithm">
-                <option value="dijkstra" selected>Dijkstra</option>
-                <option value="aStar">A*</option>
-                <option value="greedy">Greedy A*</option>
-            </select>
-            <div class="flex flex-row gap-2" v-if="algorithm === 'greedy'">
+            <div class="flex flex-row flex-wrap gap-2 justify-center" v-if="menu === 'settings'">
                 <div class="flex flex-col">
-                    <span>Strength</span>
-                    <input type="range" min="1" max="10" v-model="strength" />
+                    <span>Oppløsning</span>
+                    <input type="range" min="5" max="50" v-model="res" />
+                </div>
+                <div class="flex flex-col">
+                    <span>Hastighet</span>
+                    <input type="range" min="1" max="200" v-model="tick" />
                 </div>
             </div>
-        </div>
-        <div class="flex flex-row gap-2 justify-center">
-            <div class="flex flex-col">
-                <span>Distance: {{ distance }}</span>
+            <div class="flex flex-row flex-wrap gap-2 justify-center" v-if="menu === 'algo'">
+                <select v-model="geometry">
+                    <option value="manhatten" selected>Manhattan</option>
+                    <option value="euclidean">Euklidisk</option>
+                </select>
+                <select v-model="algorithm">
+                    <option value="dijkstra" selected>Dijkstra</option>
+                    <option value="aStar">A*</option>
+                    <option value="greedy">Grådig A*</option>
+                </select>
+                <div class="flex flex-row gap-2" v-if="algorithm === 'greedy'">
+                    <div class="flex flex-col">
+                        <span>Styrke</span>
+                        <input type="range" min="1" max="10" v-model="strength" />
+                    </div>
+                </div>
             </div>
-            <div class="flex flex-col">
-                <span>Searched: {{ searched }}</span>
+            <div class="flex flex-row gap-4 justify-center text-sm opacity-60">
+                <span>Distanse: {{ distance }}</span>
+                <span>Søkt: {{ searched }}</span>
             </div>
-        </div>
+        </template>
         <canvas id="pathfinding" class="w-full max-w-md h-auto" />
     </div>
 </template>

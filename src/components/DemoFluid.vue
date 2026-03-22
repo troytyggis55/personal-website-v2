@@ -6,6 +6,10 @@ import ButtonToggle from '@/components/ButtonToggle.vue'
 
 let interval: ReturnType<typeof setTimeout> | undefined
 
+const props = defineProps({
+    showControls: { type: Boolean, default: true }
+})
+
 const max = 500
 
 const idealSearchRadius = ref<number>(25)
@@ -182,63 +186,36 @@ onUnmounted(() => {
 
 <template>
     <div class="flex flex-row flex-wrap gap-5 justify-center w-full">
-        <div class="flex flex-col gap-4 min-w-60">
+        <div v-if="showControls" class="flex flex-col gap-4 min-w-60">
             <div class="flex flex-row flex-wrap gap-2 justify-center">
-                <ButtonToggle value="create" text="Create" v-model="clickType" />
-                <ButtonToggle value="delete" text="Delete" v-model="clickType" />
-                <button @click="clearNodes" class="border border-white p-2">Clear</button>
+                <ButtonToggle value="create" text="Opprett" v-model="clickType" />
+                <ButtonToggle value="delete" text="Slett" v-model="clickType" />
+                <button @click="clearNodes" class="border border-white/30 p-2 text-sm">Tøm</button>
             </div>
             <div class="flex flex-col">
-                <span>Search Radius {{ searchRadius.toFixed(2) }}</span>
-                <input
-                    type="range"
-                    min="10"
-                    max="100"
-                    v-model.number="idealSearchRadius"
-                    class="w-full"
-                />
+                <span class="text-sm opacity-60">Søkeradius {{ searchRadius.toFixed(2) }}</span>
+                <input type="range" min="10" max="100" v-model.number="idealSearchRadius" class="w-full" />
             </div>
             <div class="flex flex-col">
-                <span>Repel Force {{ repelForce }}</span>
-                <input
-                    type="range"
-                    min="0"
-                    max="0.1"
-                    step="0.001"
-                    v-model.number="repelForce"
-                    class="w-full"
-                />
+                <span class="text-sm opacity-60">Frastøtingskraft {{ repelForce }}</span>
+                <input type="range" min="0" max="0.1" step="0.001" v-model.number="repelForce" class="w-full" />
             </div>
             <div class="flex flex-col">
-                <span>Gravity {{ gravity }}</span>
-                <input
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.1"
-                    v-model.number="gravity"
-                    class="w-full"
-                />
+                <span class="text-sm opacity-60">Tyngdekraft {{ gravity }}</span>
+                <input type="range" min="0" max="1" step="0.1" v-model.number="gravity" class="w-full" />
             </div>
             <div class="flex flex-col">
-                <span>Friction {{ friction }}</span>
-                <input
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.01"
-                    v-model.number="friction"
-                    class="w-full"
-                />
+                <span class="text-sm opacity-60">Friksjon {{ friction }}</span>
+                <input type="range" min="0" max="1" step="0.01" v-model.number="friction" class="w-full" />
             </div>
             <div class="flex flex-col">
-                <span>Max Speed {{ maxSpeed }}</span>
+                <span class="text-sm opacity-60">Maks hastighet {{ maxSpeed }}</span>
                 <input type="range" min="1" max="20" v-model.number="maxSpeed" class="w-full" />
             </div>
-            <div class="flex flex-row gap-2 justify-between items-center">
-                <span class="">Particles: {{ nodeAmount }}</span>
-                <button class="border border-white p-2" @click="displayGrid = !displayGrid">
-                    Toggle grid
+            <div class="flex flex-row gap-2 justify-between items-center text-sm opacity-60">
+                <span>Partikler: {{ nodeAmount }}</span>
+                <button class="border border-white/30 p-2" @click="displayGrid = !displayGrid">
+                    Rutenett
                 </button>
             </div>
         </div>

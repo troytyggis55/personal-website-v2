@@ -1,196 +1,304 @@
 <script setup lang="ts">
-import MarkdownRenderer from '@/components/MarkdownRenderer.vue'
-import ContainerCard from '@/components/ContainerCard.vue'
 import DemoPathfinding from '@/components/DemoPathfinding.vue'
+import DemoFluid from '@/components/DemoFluid.vue'
 import { ref } from 'vue'
 
-const showDemo = ref(true)
+const pathCtrl = ref(false)
+const fluidCtrl = ref(false)
 </script>
 
 <template>
-    <main class="flex flex-col gap-6">
-        <!-- Row 1: Bio + Demo -->
-        <div class="flex flex-col md:flex-row gap-6">
-            <ContainerCard>
-                <h3 class="section-label">Om meg</h3>
-                <MarkdownRenderer filename="AboutMe" />
+    <main class="flex flex-col gap-20">
+        <!-- About -->
+        <section>
+            <p class="eyebrow">Om meg</p>
+            <p class="tagline">
+                Masterstudent i informatikk ved NTNU med spesialisering i algoritmer og
+                datastrukturer. Jobber som fullstackutvikler med tyngde på
+                <em>teknisk backend</em>.
+            </p>
+        </section>
 
-                <div class="mt-6 flex flex-col gap-4">
-                    <div class="experience-entry">
-                        <div class="entry-header">
-                            <span class="entry-title">Bekk</span>
-                            <span class="entry-tag">Sommerjobb 2025</span>
-                        </div>
-                        <p class="entry-desc">Konsulent — backend og systemutvikling.</p>
-                    </div>
-
-                    <div class="experience-entry">
-                        <div class="entry-header">
-                            <a
-                                href="https://tihlde.org"
-                                target="_blank"
-                                class="entry-title link-accent"
-                                >TIHLDE</a
-                            >
-                            <span class="entry-tag">Leder 2024/25</span>
-                        </div>
-                        <p class="entry-desc">
-                            Leder for linjeforeningen for informatikk- og datastudenter ved NTNU,
-                            med over 700 medlemmer.
-                        </p>
+        <!-- Experience -->
+        <section>
+            <p class="eyebrow">Erfaring</p>
+            <div class="exp-list">
+                <div class="exp-row">
+                    <span class="exp-company">Bekk</span>
+                    <div class="exp-right">
+                        <span class="exp-period">Sommer 2025</span>
+                        <span class="exp-role">Sommerjobb · konsulent</span>
                     </div>
                 </div>
-            </ContainerCard>
-
-            <ContainerCard class="md:max-w-md w-full">
-                <h3 class="section-label">Pathleting-demo</h3>
-                <DemoPathfinding v-if="showDemo" />
-                <button
-                    v-else
-                    @click="showDemo = true"
-                    class="text-5xl w-full h-full min-h-56 text-white border border-white/30 hover:bg-white/10 transition rounded"
-                >
-                    Start demo
-                </button>
-
-                <div class="mt-4 flex justify-center gap-2" v-if="showDemo">
-                    <button
-                        class="px-4 py-2 text-sm text-white border border-white/30 hover:bg-white/10 transition rounded"
-                        @click="showDemo = false"
+                <div class="exp-row">
+                    <a href="https://tihlde.org" target="_blank" class="exp-company exp-link"
+                        >TIHLDE</a
                     >
-                        Stopp
-                    </button>
-                    <router-link
-                        to="/demo/pathfinding"
-                        class="px-4 py-2 text-sm text-white border border-white/30 hover:bg-white/10 transition rounded"
-                    >
-                        Flere demoer
-                    </router-link>
+                    <div class="exp-right">
+                        <span class="exp-period">2024–25</span>
+                        <span class="exp-role">Leder · 700+ studenter</span>
+                    </div>
                 </div>
-            </ContainerCard>
-        </div>
+            </div>
+        </section>
 
-        <!-- Row 2: Projects -->
-        <ContainerCard>
-            <h3 class="section-label">Prosjekter</h3>
-            <a href="https://chatssb.no" target="_blank" class="project-card group">
-                <div class="project-card-inner">
-                    <div class="flex items-center gap-3">
-                        <span class="project-title">ChatSSB.no</span>
-                        <span class="project-arrow">↗</span>
-                    </div>
-                    <p class="project-desc">
-                        Gjør SSBs åpne data dramatisk mer tilgjengelig — kombinerer et chat-grensesnitt
-                        med SSBs API slik at hvem som helst kan utforske norsk statistikk uten teknisk
-                        forkunnskaper.
-                    </p>
-                    <div class="flex gap-2 mt-3 flex-wrap">
-                        <span class="tech-tag">Fullstack</span>
-                        <span class="tech-tag">API-integrasjon</span>
-                        <span class="tech-tag">AI</span>
-                    </div>
+        <!-- Project -->
+        <section>
+            <p class="eyebrow">Prosjekt</p>
+            <a href="https://chatssb.no" target="_blank" class="chatssb-card">
+                <div class="chatssb-header">
+                    <span class="chatssb-name">ChatSSB.no</span>
+                    <span class="chatssb-arrow">↗</span>
+                </div>
+                <p class="chatssb-desc">
+                    AI-drevet chatgrensesnitt som gjør SSBs åpne data dramatisk mer tilgjengelig —
+                    hvem som helst kan utforske norsk statistikk uten tekniske forkunnskaper.
+                </p>
+                <div class="chatssb-tags">
+                    <span class="tag">Fullstack</span>
+                    <span class="tag">API-integrasjon</span>
+                    <span class="tag">AI</span>
                 </div>
             </a>
-        </ContainerCard>
+        </section>
+
+        <!-- Demos -->
+        <section>
+            <p class="eyebrow">Interaktive demoer</p>
+            <div class="demos-wrap">
+                <div class="demo-block">
+                    <div class="demo-hd">
+                        <span class="demo-name">Pathleting</span>
+                        <button
+                            class="ctrl-toggle"
+                            @click="pathCtrl = !pathCtrl"
+                            :aria-expanded="pathCtrl"
+                        >
+                            {{ pathCtrl ? 'skjul' : 'innstillinger' }}
+                        </button>
+                    </div>
+                    <DemoPathfinding :show-controls="pathCtrl" />
+                </div>
+
+                <div class="demo-sep" aria-hidden="true" />
+
+                <div class="demo-block">
+                    <div class="demo-hd">
+                        <span class="demo-name">Væskesimulering</span>
+                        <button
+                            class="ctrl-toggle"
+                            @click="fluidCtrl = !fluidCtrl"
+                            :aria-expanded="fluidCtrl"
+                        >
+                            {{ fluidCtrl ? 'skjul' : 'innstillinger' }}
+                        </button>
+                    </div>
+                    <DemoFluid :show-controls="fluidCtrl" />
+                </div>
+            </div>
+        </section>
     </main>
 </template>
 
 <style scoped>
-.section-label {
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
+/* ── Shared ─────────────────────────────────── */
+.eyebrow {
+    font-family: 'Lora', serif;
+    font-size: 0.62rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.5);
-    margin-bottom: 0.75rem;
+    color: var(--color-amber);
+    opacity: 0.7;
+    margin-bottom: 1.25rem;
 }
 
-.experience-entry {
-    padding: 0.875rem 1rem;
-    border-left: 2px solid rgba(255, 255, 255, 0.15);
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 0 6px 6px 0;
+/* ── About ───────────────────────────────────── */
+.tagline {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+    color: rgba(230, 226, 217, 0.8);
+    line-height: 1.8;
+    max-width: 52ch;
 }
 
-.entry-header {
+.tagline em {
+    font-style: italic;
+    color: var(--color-fg);
+}
+
+/* ── Experience ──────────────────────────────── */
+.exp-list {
+    border-top: 1px solid var(--color-border);
+}
+
+.exp-row {
     display: flex;
     align-items: baseline;
-    gap: 0.75rem;
-    margin-bottom: 0.25rem;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.4rem 0;
+    border-bottom: 1px solid var(--color-border);
 }
 
-.entry-title {
+.exp-company {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.3rem, 2.5vw, 1.7rem);
     font-weight: 700;
-    font-size: 1rem;
-    color: white;
+    color: var(--color-fg);
+    letter-spacing: -0.01em;
 }
 
-.link-accent:hover {
+.exp-link:hover {
     color: var(--color-accent);
 }
 
-.entry-tag {
-    font-size: 0.72rem;
-    color: rgba(255, 255, 255, 0.45);
-    font-weight: 500;
+.exp-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.15rem;
+    flex-shrink: 0;
 }
 
-.entry-desc {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.5;
+.exp-period {
+    font-family: 'Lora', serif;
+    font-size: 0.7rem;
+    color: var(--color-amber);
+    opacity: 0.75;
+    letter-spacing: 0.05em;
 }
 
-.project-card {
+.exp-role {
+    font-size: 0.82rem;
+    color: rgba(230, 226, 217, 0.45);
+    font-style: italic;
+}
+
+/* ── ChatSSB ─────────────────────────────────── */
+.chatssb-card {
     display: block;
     text-decoration: none;
+    padding: 2rem 2.25rem;
+    border: 1px solid var(--color-border);
+    background: rgba(255, 255, 255, 0.02);
+    transition:
+        background 0.25s,
+        border-color 0.25s;
 }
 
-.project-card-inner {
-    padding: 1.25rem;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.05);
-    transition: background 0.2s, border-color 0.2s;
+.chatssb-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(66, 184, 131, 0.35);
 }
 
-.project-card:hover .project-card-inner {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.25);
+.chatssb-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 0.9rem;
 }
 
-.project-title {
-    font-size: 1.15rem;
+.chatssb-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
     font-weight: 700;
-    color: white;
+    color: var(--color-fg);
+    letter-spacing: -0.02em;
 }
 
-.project-arrow {
-    font-size: 1.1rem;
+.chatssb-arrow {
+    font-size: 1.3rem;
     color: var(--color-accent);
     transition: transform 0.2s;
 }
 
-.project-card:hover .project-arrow {
-    transform: translate(2px, -2px);
+.chatssb-card:hover .chatssb-arrow {
+    transform: translate(3px, -3px);
 }
 
-.project-desc {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.6;
-    margin-top: 0.4rem;
+.chatssb-desc {
+    font-size: 0.95rem;
+    color: rgba(230, 226, 217, 0.55);
+    line-height: 1.7;
+    max-width: 58ch;
 }
 
-.tech-tag {
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
+.chatssb-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 1.25rem;
+}
+
+.tag {
+    font-family: 'Lora', serif;
+    font-size: 0.62rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     padding: 0.2rem 0.6rem;
-    border-radius: 999px;
-    background: rgba(66, 184, 131, 0.15);
     color: var(--color-accent);
-    border: 1px solid rgba(66, 184, 131, 0.3);
+    border: 1px solid rgba(66, 184, 131, 0.2);
+}
+
+/* ── Demos ───────────────────────────────────── */
+.demos-wrap {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+}
+
+@media (min-width: 1280px) {
+    .demos-wrap {
+        grid-template-columns: 1fr 1px 1fr;
+        gap: 0;
+    }
+
+    .demo-sep {
+        background: var(--color-border);
+        margin: 0 2.5rem;
+    }
+}
+
+.demo-block {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.demo-hd {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.demo-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-fg);
+    letter-spacing: -0.01em;
+}
+
+.ctrl-toggle {
+    font-family: 'Lora', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-amber);
+    opacity: 0.5;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: opacity 0.2s;
+}
+
+.ctrl-toggle:hover {
+    opacity: 1;
 }
 </style>
 
@@ -200,6 +308,6 @@ const showDemo = ref(true)
 }
 
 .hover-glow:hover {
-    filter: drop-shadow(0 0 10px white);
+    filter: drop-shadow(0 0 8px rgba(230, 226, 217, 0.6));
 }
 </style>
