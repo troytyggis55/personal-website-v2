@@ -1,1 +1,0 @@
-import{p as a,_ as r,a as t,L as o}from"./index-CPPx4aMo.js";const s={};function u(d,n){return r(),t("div",null,[...n[0]||(n[0]=[o("h1",null,"404 - Not Found",-1)])])}const c=a(s,[["render",u]]);export{c as default};
