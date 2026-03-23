@@ -185,8 +185,9 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <div class="flex flex-row flex-wrap gap-5 justify-center w-full">
-        <div v-if="showControls" class="flex flex-col gap-4 min-w-60">
+    <div class="flex flex-col gap-5 items-center w-full">
+        <canvas id="fluidsimulation" class="w-full max-w-md h-auto" />
+        <div v-if="showControls" class="flex flex-col gap-4 min-w-60 w-full max-w-md">
             <div class="flex flex-row flex-wrap gap-2 justify-center">
                 <ButtonToggle value="create" text="Opprett" v-model="clickType" />
                 <ButtonToggle value="delete" text="Slett" v-model="clickType" />
@@ -219,6 +220,5 @@ onUnmounted(() => {
                 </button>
             </div>
         </div>
-        <canvas id="fluidsimulation" class="w-full max-w-md h-auto" />
     </div>
 </template>

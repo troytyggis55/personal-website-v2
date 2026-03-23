@@ -311,6 +311,7 @@ onUnmounted(() => {
 
 <template>
     <div class="flex flex-col gap-3 justify-center items-center">
+        <canvas id="pathfinding" class="w-full max-w-md h-auto" />
         <template v-if="showControls">
             <div class="flex flex-row gap-2 justify-center">
                 <ButtonToggle text="Layout" value="layout" v-model="menu" />
@@ -357,7 +358,6 @@ onUnmounted(() => {
                 <span>Søkt: {{ searched }}</span>
             </div>
         </template>
-        <canvas id="pathfinding" class="w-full max-w-md h-auto" />
     </div>
 </template>
 

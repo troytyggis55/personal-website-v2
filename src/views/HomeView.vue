@@ -11,11 +11,9 @@ const fluidCtrl = ref(false)
     <main class="flex flex-col gap-20">
         <!-- About -->
         <section>
-            <p class="eyebrow">Om meg</p>
             <p class="tagline">
-                Masterstudent i informatikk ved NTNU med spesialisering i algoritmer og
-                datastrukturer. Jobber som fullstackutvikler med tyngde på
-                <em>teknisk backend</em>.
+                Masterstudent i Datateknologi ved NTNU med spesialisering i effektive datasystemer.<br>
+                Kan fullstack, liker backend, <em>elsker utfordringer</em> <sup>(&hellip;og hater slagord)</sup>
             </p>
         </section>
 
@@ -36,7 +34,7 @@ const fluidCtrl = ref(false)
                     >
                     <div class="exp-right">
                         <span class="exp-period">2024–25</span>
-                        <span class="exp-role">Leder · 700+ studenter</span>
+                        <span class="exp-role">Leder for linjeforening · 700+ studenter</span>
                     </div>
                 </div>
             </div>
@@ -64,36 +62,34 @@ const fluidCtrl = ref(false)
 
         <!-- Demos -->
         <section>
-            <p class="eyebrow">Interaktive demoer</p>
+            <p class="eyebrow">"Håndlaget" kode anno 2023</p>
             <div class="demos-wrap">
                 <div class="demo-block">
                     <div class="demo-hd">
-                        <span class="demo-name">Pathleting</span>
-                        <button
-                            class="ctrl-toggle"
-                            @click="pathCtrl = !pathCtrl"
-                            :aria-expanded="pathCtrl"
-                        >
-                            {{ pathCtrl ? 'skjul' : 'innstillinger' }}
-                        </button>
+                        <span class="demo-name">Pathfinding</span>
                     </div>
                     <DemoPathfinding :show-controls="pathCtrl" />
+                    <button
+                        class="ctrl-toggle"
+                        @click="pathCtrl = !pathCtrl"
+                        :aria-expanded="pathCtrl"
+                    >
+                        {{ pathCtrl ? 'skjul' : 'innstillinger' }}
+                    </button>
                 </div>
-
-                <div class="demo-sep" aria-hidden="true" />
 
                 <div class="demo-block">
                     <div class="demo-hd">
-                        <span class="demo-name">Væskesimulering</span>
-                        <button
-                            class="ctrl-toggle"
-                            @click="fluidCtrl = !fluidCtrl"
-                            :aria-expanded="fluidCtrl"
-                        >
-                            {{ fluidCtrl ? 'skjul' : 'innstillinger' }}
-                        </button>
+                        <span class="demo-name">Fluid simulations</span>
                     </div>
                     <DemoFluid :show-controls="fluidCtrl" />
+                    <button
+                        class="ctrl-toggle"
+                        @click="fluidCtrl = !fluidCtrl"
+                        :aria-expanded="fluidCtrl"
+                    >
+                        {{ fluidCtrl ? 'skjul' : 'innstillinger' }}
+                    </button>
                 </div>
             </div>
         </section>
@@ -104,12 +100,12 @@ const fluidCtrl = ref(false)
 /* ── Shared ─────────────────────────────────── */
 .eyebrow {
     font-family: 'Lora', serif;
-    font-size: 0.62rem;
+    font-size: 1rem;
     font-weight: 400;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--color-amber);
-    opacity: 0.7;
+    opacity: 0.8;
     margin-bottom: 1.25rem;
 }
 
@@ -171,7 +167,7 @@ const fluidCtrl = ref(false)
 
 .exp-role {
     font-size: 0.82rem;
-    color: rgba(230, 226, 217, 0.45);
+    color: rgba(230, 226, 217, 0.65);
     font-style: italic;
 }
 
@@ -246,18 +242,13 @@ const fluidCtrl = ref(false)
 .demos-wrap {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 3.5rem;
+    gap: 1.5rem;
 }
 
 @media (min-width: 1280px) {
     .demos-wrap {
-        grid-template-columns: 1fr 1px 1fr;
-        gap: 0;
-    }
-
-    .demo-sep {
-        background: var(--color-border);
-        margin: 0 2.5rem;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
     }
 }
 
@@ -265,14 +256,14 @@ const fluidCtrl = ref(false)
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
+    border: 1px solid var(--color-border);
+    padding: 1.5rem;
 }
 
 .demo-hd {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 0.85rem;
-    border-bottom: 1px solid var(--color-border);
 }
 
 .demo-name {
@@ -285,11 +276,11 @@ const fluidCtrl = ref(false)
 
 .ctrl-toggle {
     font-family: 'Lora', serif;
-    font-size: 0.62rem;
+    font-size: 0.8rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--color-amber);
-    opacity: 0.5;
+    opacity: 0.8;
     background: none;
     border: none;
     cursor: pointer;

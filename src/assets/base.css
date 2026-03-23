@@ -3,9 +3,9 @@
 :root {
     --color-fg: #e6e2d9;
     --color-accent: #42b883;
-    --color-amber: #c4954a;
+    --color-amber: #e8b96d;
     --color-bg: #0c0c1a;
-    --color-border: rgba(255, 255, 255, 0.09);
+    --color-border: rgba(255, 255, 255, 0.27);
 }
 
 *,
