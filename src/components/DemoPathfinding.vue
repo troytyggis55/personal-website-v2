@@ -2,6 +2,7 @@
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import ButtonToggle from '@/components/ButtonToggle.vue'
 import Node from '../demos/pathfinding'
+import { Noise } from 'noisejs'
 
 const props = defineProps({
     showControls: { type: Boolean, default: true }
@@ -11,12 +12,13 @@ const max = 500
 const res = ref(50)
 const cellSize = computed(() => max / res.value)
 
-const tick = ref(50)
+const tick = ref(200)
 let searchInterval: ReturnType<typeof setTimeout> | undefined
 let pathInterval: ReturnType<typeof setTimeout> | undefined
+let autoResetTimeout: ReturnType<typeof setTimeout> | undefined
 
 const algorithm = ref('aStar')
-const geometry = ref('manhatten')
+const geometry = ref('euclidean')
 const strength = ref(1)
 
 const searched = ref(0)
@@ -26,8 +28,10 @@ const menu = ref('layout')
 
 let cells: any[][]
 
-// black == empty, white == wall, blue == start, red == end, visited == yellow
 const cellColor = ref(`gray`)
+const hasInteracted = ref(false)
+
+// ── Canvas helpers ────────────────────────────────────────────────────────────
 
 onMounted(() => {
     const canvas = document.getElementById('pathfinding') as HTMLCanvasElement
@@ -44,6 +48,8 @@ onMounted(() => {
     let mouseEnter = false
 
     const handleMouseDownOrTouchStart = (e: MouseEvent | TouchEvent) => {
+        hasInteracted.value = true
+        clearAutoReset()
         clearCurrentInterval()
         clearSearch(canvas)
 
@@ -91,18 +97,51 @@ onMounted(() => {
 
     canvas.addEventListener('mousemove', handleMouseMoveOrTouchMove)
     canvas.addEventListener('touchmove', handleMouseMoveOrTouchMove)
+
+    // Listenere for when showControls toggles, to reset hasInteracted
+    watch(
+        () => props.showControls,
+        newVal => {
+            if (!newVal) {
+                hasInteracted.value = false
+                scheduleAutoReset()
+            } else {
+                console.log('clearing auto reset')
+                hasInteracted.value = true
+                clearAutoReset()
+            }
+        }
+    )
 })
 
 const clearCurrentInterval = () => {
     clearInterval(searchInterval)
     clearInterval(pathInterval)
-
     searchInterval = undefined
     pathInterval = undefined
 }
 
+const clearAutoReset = () => {
+    clearTimeout(autoResetTimeout)
+    autoResetTimeout = undefined
+}
+
+const scheduleAutoReset = () => {
+    clearAutoReset()
+    autoResetTimeout = setTimeout(() => {
+        if (!hasInteracted.value) {
+            const canvas = document.getElementById('pathfinding') as HTMLCanvasElement
+            if (canvas) {
+                resetCanvas()
+                randomizeCanvas()
+            }
+        }
+    }, 1000)
+}
+
 watch([res], () => {
     clearCurrentInterval()
+    clearAutoReset()
     const canvas = document.getElementById('pathfinding') as HTMLCanvasElement
     canvas.width = max + 1
     canvas.height = max + 1
@@ -118,6 +157,7 @@ watch([tick, algorithm, geometry, strength], () => {
 
 const resetCanvas = () => {
     clearCurrentInterval()
+    clearAutoReset()
 
     const canvas = document.getElementById('pathfinding') as HTMLCanvasElement
 
@@ -135,6 +175,44 @@ const resetCanvas = () => {
     }
 }
 
+// Find the cell in a region with the minimum local noise sum (most open area).
+// Region is defined as [x0, x1) x [y0, y1) in grid coords.
+function findOpenCell(
+    noiseMap: number[][],
+    x0: number,
+    x1: number,
+    y0: number,
+    y1: number,
+    radius: number = 2
+): [number, number] {
+    let bestX = x0
+    let bestY = y0
+    let bestScore = Infinity
+
+    for (let x = x0; x < x1; x++) {
+        for (let y = y0; y < y1; y++) {
+            let score = 0
+            let count = 0
+            for (let dx = -radius; dx <= radius; dx++) {
+                for (let dy = -radius; dy <= radius; dy++) {
+                    const nx = x + dx
+                    const ny = y + dy
+                    if (nx >= 0 && nx < noiseMap.length && ny >= 0 && ny < noiseMap[0].length) {
+                        score += noiseMap[nx][ny]
+                        count++
+                    }
+                }
+            }
+            if (count > 0 && score / count < bestScore) {
+                bestScore = score / count
+                bestX = x
+                bestY = y
+            }
+        }
+    }
+    return [bestX, bestY]
+}
+
 const randomizeCanvas = () => {
     const canvas = document.getElementById('pathfinding') as HTMLCanvasElement
     const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
@@ -142,22 +220,48 @@ const randomizeCanvas = () => {
     clearCurrentInterval()
     clearSearch(canvas)
 
-    for (let i = 0; i < res.value; i++) {
-        for (let j = 0; j < res.value; j++) {
-            cells[i][j].state = Math.random() < 0.3 ? 'gray' : 'black'
-            cells[i][j].draw(ctx, cellSize)
+    const perlin = new Noise(Math.random())
+
+    const scale = 0.18
+    const wallThreshold = 0.15 // noise > threshold → wall (~30% coverage)
+
+    // Build noise map
+    const noiseMap: number[][] = Array.from({ length: res.value }, () =>
+        new Array(res.value).fill(0)
+    )
+    for (let x = 0; x < res.value; x++) {
+        for (let y = 0; y < res.value; y++) {
+            const n = perlin.perlin2(x * scale, y * scale)
+            noiseMap[x][y] = n
+            cells[x][y].state = n > wallThreshold ? 'gray' : 'black'
+            cells[x][y].draw(ctx, cellSize)
         }
     }
 
-    let randomIndex1 = Math.floor(Math.random() * res.value)
-    let randomIndex2 = Math.floor(Math.random() * res.value)
-    cells[randomIndex1][randomIndex2].state = 'blue'
-    cells[randomIndex1][randomIndex2].draw(ctx, cellSize)
+    // Place start and end in different random quadrants
+    const half = Math.floor(res.value / 2)
+    const margin = Math.floor(res.value * 0.1)
 
-    randomIndex1 = Math.floor(Math.random() * res.value)
-    randomIndex2 = Math.floor(Math.random() * res.value)
-    cells[randomIndex1][randomIndex2].state = 'red'
-    cells[randomIndex1][randomIndex2].draw(ctx, cellSize)
+    const quadrants: Array<[number, number, number, number]> = [
+        [margin, half, margin, half],
+        [half, res.value - margin, margin, half],
+        [margin, half, half, res.value - margin],
+        [half, res.value - margin, half, res.value - margin]
+    ]
+
+    const startQuadrantIndex = Math.floor(Math.random() * quadrants.length)
+    let endQuadrantIndex = Math.floor(Math.random() * (quadrants.length - 1))
+    if (endQuadrantIndex >= startQuadrantIndex) endQuadrantIndex++
+
+    const [sx0, sx1, sy0, sy1] = quadrants[startQuadrantIndex]
+    const [sx, sy] = findOpenCell(noiseMap, sx0, sx1, sy0, sy1)
+    cells[sx][sy].state = 'blue'
+    cells[sx][sy].draw(ctx, cellSize)
+
+    const [ex0, ex1, ey0, ey1] = quadrants[endQuadrantIndex]
+    const [ex, ey] = findOpenCell(noiseMap, ex0, ex1, ey0, ey1)
+    cells[ex][ey].state = 'red'
+    cells[ex][ey].draw(ctx, cellSize)
 
     pathfind(canvas)
 }
@@ -190,7 +294,8 @@ const pathfind = (canvas: HTMLCanvasElement) => {
 
         if (current.equals(end)) {
             showPath(canvas, current)
-            clearInterval(searchInterval) // Only clear this interval, pathInterval will be cleared when path is shown
+            clearInterval(searchInterval)
+            searchInterval = undefined
             return
         }
         current.state = current === start ? 'blue' : 'yellow'
@@ -229,10 +334,7 @@ const pathfind = (canvas: HTMLCanvasElement) => {
                 if (!queue.includes(neighbor)) queue.push(neighbor)
             }
         }
-        queue.sort(
-            (a, b) =>
-                a.weightedDistanceFromStart - b.weightedDistanceFromStart || a.y - b.y || a.x - b.x
-        )
+        queue.sort((a, b) => a.weightedDistanceFromStart - b.weightedDistanceFromStart)
     }, 1000 / tick.value)
 }
 
@@ -242,6 +344,7 @@ const showPath = (canvas: HTMLCanvasElement, current: Node) => {
     pathInterval = setInterval(() => {
         if (!previous) {
             clearCurrentInterval()
+            scheduleAutoReset()
             return
         }
         previous.state = previous.state === 'blue' ? 'blue' : 'green'
@@ -306,6 +409,7 @@ const setCellByPixel = (canvas: HTMLCanvasElement, x: number, y: number, color: 
 
 onUnmounted(() => {
     clearCurrentInterval()
+    clearAutoReset()
 })
 </script>
 
@@ -316,7 +420,7 @@ onUnmounted(() => {
             <div class="flex flex-row gap-2 justify-center">
                 <ButtonToggle text="Layout" value="layout" v-model="menu" />
                 <ButtonToggle text="Algoritme" value="algo" v-model="menu" />
-                <ButtonToggle text="Innstillinger" value="settings" v-model="menu" />
+                <ButtonToggle text="Konfigurasjon" value="settings" v-model="menu" />
             </div>
             <div class="flex flex-row flex-wrap gap-2 justify-center" v-if="menu === 'layout'">
                 <ButtonToggle value="gray" text="Vegg" v-model="cellColor" />
