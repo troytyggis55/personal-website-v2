@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import DemoNetwork from '@/components/DemoNetwork.vue'
+import DemoPerlin from '@/components/DemoPerlin.vue'
 </script>
 
 <template>
-    <DemoNetwork />
+    <DemoPerlin />
 
     <header class="site-header">
         <router-link to="/" class="header-name-link">
