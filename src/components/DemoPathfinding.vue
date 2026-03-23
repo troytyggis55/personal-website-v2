@@ -30,6 +30,8 @@ let cells: any[][]
 
 const cellColor = ref(`gray`)
 const hasInteracted = ref(false)
+const isVisible = ref(false)
+let observer: IntersectionObserver | undefined
 
 // ── Canvas helpers ────────────────────────────────────────────────────────────
 
@@ -42,6 +44,24 @@ onMounted(() => {
     canvas.height = max + 1
 
     resetCanvas()
+
+    observer = new IntersectionObserver(
+        entries => {
+            const visible = entries[0].isIntersecting
+            isVisible.value = visible
+            if (visible) {
+                // Resume auto-loop if no active search and user hasn't interacted
+                if (!hasInteracted.value && !searchInterval && !pathInterval) {
+                    randomizeCanvas()
+                }
+            } else {
+                clearAutoReset()
+            }
+        },
+        { threshold: 0.1 },
+    )
+    observer.observe(canvas)
+
     randomizeCanvas()
 
     let mouseDown = false
@@ -283,6 +303,7 @@ const pathfind = (canvas: HTMLCanvasElement) => {
     queue.push(start)
 
     searchInterval = setInterval(() => {
+        if (!isVisible.value) return
         if (queue.length === 0) {
             clearCurrentInterval()
             return
@@ -342,6 +363,7 @@ const showPath = (canvas: HTMLCanvasElement, current: Node) => {
     let previous = current.previous
 
     pathInterval = setInterval(() => {
+        if (!isVisible.value) return
         if (!previous) {
             clearCurrentInterval()
             scheduleAutoReset()
@@ -410,6 +432,7 @@ const setCellByPixel = (canvas: HTMLCanvasElement, x: number, y: number, color: 
 onUnmounted(() => {
     clearCurrentInterval()
     clearAutoReset()
+    observer?.disconnect()
 })
 </script>
 

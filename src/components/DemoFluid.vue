@@ -5,6 +5,7 @@ import Victor from 'victor'
 import ButtonToggle from '@/components/ButtonToggle.vue'
 
 let interval: ReturnType<typeof setTimeout> | undefined
+let observer: IntersectionObserver | undefined
 
 const props = defineProps({
     showControls: { type: Boolean, default: true }
@@ -39,7 +40,12 @@ onMounted(() => {
         nodes.push(new Node(Math.random() * canvas.width, Math.random() * canvas.height))
     }
 
-    interval = setInterval(() => {
+    let mouseDown = false
+    let mouseEnter = false
+    let mouseX = 0
+    let mouseY = 0
+
+    const tick = () => {
         ctx.fillStyle = 'black'
         ctx.fillRect(0, 0, canvas.width, canvas.height)
 
@@ -63,12 +69,27 @@ onMounted(() => {
             node.move(canvas, gravity.value, friction.value, maxSpeed.value, searchRadius.value)
             node.draw(ctx)
         }
-    }, 1000 / 60)
+    }
 
-    let mouseDown = false
-    let mouseEnter = false
-    let mouseX = 0
-    let mouseY = 0
+    const startLoop = () => {
+        if (!interval) interval = setInterval(tick, 1000 / 60)
+    }
+
+    const stopLoop = () => {
+        clearInterval(interval)
+        interval = undefined
+    }
+
+    observer = new IntersectionObserver(
+        entries => {
+            console.log('Visibility changed:', entries[0].isIntersecting)
+            entries[0].isIntersecting ? startLoop() : stopLoop()
+        },
+        { threshold: 0.1 },
+    )
+    observer.observe(canvas)
+
+    startLoop()
 
     const handleMouseDownOrTouchStart = (e: MouseEvent | TouchEvent) => {
         mouseDown = true
@@ -181,6 +202,7 @@ const drawGrid = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, grid
 
 onUnmounted(() => {
     clearInterval(interval)
+    observer?.disconnect()
 })
 </script>
 
