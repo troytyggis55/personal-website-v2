@@ -1,0 +1,1 @@
+import{_ as o,o as n,c as t,f as r}from"./index-CtFS0xzp.js";const s={};function c(a,e){return n(),t("div",null,[...e[0]||(e[0]=[r("h1",null,"404 - Not Found",-1)])])}const d=o(s,[["render",c]]);export{d as default};
