@@ -8,15 +8,17 @@ const fluidCtrl = ref(false)
 </script>
 
 <template>
-    <main class="flex flex-col gap-20">
-        <!-- About -->
-        <section>
-            <p class="tagline">
-                Masterstudent i Datateknologi ved NTNU med spesialisering i effektive datasystemer.<br>
-                Kan fullstack, liker backend, <em>elsker utfordringer</em> <sup>(&hellip;og hater slagord)</sup>
-            </p>
-        </section>
+    <header class="site-hero">
+        <span class="header-name">Trygve Jørgensen</span>
+        <img src="/images/KvadratProfilbilde.jpeg" alt="Profilbilde" class="header-photo" />
+        <p class="tagline">
+            Masterstudent i Datateknologi ved NTNU med spesialisering i effektive datasystemer.<br />
+            Kan fullstack, liker backend, <em>elsker utfordringer</em>
+            <sup>(&hellip;og hater slagord)</sup>
+        </p>
+    </header>
 
+    <main class="flex flex-col gap-20">
         <!-- Experience -->
         <section>
             <p class="eyebrow">Erfaring</p>
@@ -29,9 +31,7 @@ const fluidCtrl = ref(false)
                     </div>
                 </div>
                 <div class="exp-row">
-                    <a href="https://tihlde.org" target="_blank" class="exp-company exp-link"
-                        >TIHLDE</a
-                    >
+                    <span class="exp-company">TIHLDE</span>
                     <div class="exp-right">
                         <span class="exp-period">2024–25</span>
                         <span class="exp-role">Leder for linjeforening · 700+ studenter</span>
@@ -65,38 +65,162 @@ const fluidCtrl = ref(false)
             <p class="eyebrow">"Håndlaget" kode anno 2023</p>
             <div class="demos-wrap">
                 <div class="demo-block">
-                    <div class="demo-hd">
-                        <span class="demo-name">Pathfinding</span>
+                    <div class="demo-inner">
+                        <div class="demo-hd">
+                            <span class="demo-name">Pathfinding</span>
+                        </div>
+                        <DemoPathfinding :show-controls="pathCtrl" />
+                        <button
+                            class="ctrl-toggle"
+                            @click="pathCtrl = !pathCtrl"
+                            :aria-expanded="pathCtrl"
+                        >
+                            {{ pathCtrl ? 'skjul' : 'innstillinger' }}
+                        </button>
                     </div>
-                    <DemoPathfinding :show-controls="pathCtrl" />
-                    <button
-                        class="ctrl-toggle"
-                        @click="pathCtrl = !pathCtrl"
-                        :aria-expanded="pathCtrl"
-                    >
-                        {{ pathCtrl ? 'skjul' : 'innstillinger' }}
-                    </button>
                 </div>
 
                 <div class="demo-block">
-                    <div class="demo-hd">
-                        <span class="demo-name">Fluid simulations</span>
+                    <div class="demo-inner">
+                        <div class="demo-hd">
+                            <span class="demo-name">Fluid simulations</span>
+                        </div>
+                        <DemoFluid :show-controls="fluidCtrl" />
+                        <button
+                            class="ctrl-toggle"
+                            @click="fluidCtrl = !fluidCtrl"
+                            :aria-expanded="fluidCtrl"
+                        >
+                            {{ fluidCtrl ? 'skjul' : 'innstillinger' }}
+                        </button>
                     </div>
-                    <DemoFluid :show-controls="fluidCtrl" />
-                    <button
-                        class="ctrl-toggle"
-                        @click="fluidCtrl = !fluidCtrl"
-                        :aria-expanded="fluidCtrl"
-                    >
-                        {{ fluidCtrl ? 'skjul' : 'innstillinger' }}
-                    </button>
                 </div>
             </div>
         </section>
     </main>
+
+    <footer class="site-footer">
+        <div class="footer-contact">
+            <p>+47 94 05 05 56</p>
+            <a href="mailto:trygveabjo@gmail.com">trygveabjo@gmail.com</a>
+        </div>
+        <div class="footer-icons">
+            <a href="https://github.com/troytyggis55" target="_blank" class="hover-glow">
+                <img src="/src/svg/github.svg" alt="GitHub" class="footer-icon" />
+            </a>
+            <a
+                href="https://www.linkedin.com/in/trygve-j%C3%B8rgensen-80b1b9259/"
+                target="_blank"
+                class="hover-glow"
+            >
+                <img src="/src/svg/linkedin.svg" alt="LinkedIn" class="footer-icon" />
+            </a>
+        </div>
+    </footer>
 </template>
 
 <style scoped>
+/* ── Hero ────────────────────────────────────── */
+.site-hero {
+    display: grid;
+    grid-template-areas:
+        'name'
+        'photo'
+        'tagline';
+    gap: 1.75rem;
+    margin-bottom: 5rem;
+    margin-top: 5rem;
+    padding-bottom: 2rem;
+    justify-items: center;
+}
+
+.header-name {
+    grid-area: name;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 3.2rem);
+    font-weight: 900;
+    color: var(--color-fg);
+    letter-spacing: -0.02em;
+    line-height: 1;
+}
+
+.header-photo {
+    grid-area: photo;
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    object-fit: cover;
+}
+
+.tagline {
+    grid-area: tagline;
+    font-family: 'Lora', serif;
+    font-size: clamp(1.4rem, 2.5vw, 1.6rem);
+    color: rgba(230, 226, 217, 0.8);
+    line-height: 1.75;
+    max-width: 48ch;
+}
+
+@media (min-width: 640px) {
+    .site-hero {
+        grid-template-areas:
+            'name  photo'
+            'tagline photo';
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        column-gap: 3rem;
+        row-gap: 1.5rem;
+        justify-items: left;
+    }
+
+    .header-photo {
+        width: 17rem;
+        height: 17rem;
+        align-self: center;
+    }
+}
+
+/* ── Footer ──────────────────────────────────── */
+.site-footer {
+    margin-top: 6rem;
+    padding-top: 1.75rem;
+    padding-bottom: 4rem;
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.footer-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.1rem;
+    font-size: 0.8rem;
+    color: rgba(230, 226, 217, 0.35);
+}
+
+.footer-contact a:hover {
+    color: var(--color-fg);
+}
+
+.footer-icons {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.footer-icon {
+    height: 1.75rem;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+
+.footer-icons a:hover .footer-icon {
+    opacity: 0.9;
+}
+
 /* ── Shared ─────────────────────────────────── */
 .eyebrow {
     font-family: 'Lora', serif;
@@ -107,15 +231,6 @@ const fluidCtrl = ref(false)
     color: var(--color-amber);
     opacity: 0.8;
     margin-bottom: 1.25rem;
-}
-
-/* ── About ───────────────────────────────────── */
-.tagline {
-    font-family: 'Lora', serif;
-    font-size: clamp(1.1rem, 2.2vw, 1.35rem);
-    color: rgba(230, 226, 217, 0.8);
-    line-height: 1.8;
-    max-width: 52ch;
 }
 
 .tagline em {
@@ -145,10 +260,6 @@ const fluidCtrl = ref(false)
     letter-spacing: -0.01em;
 }
 
-.exp-link:hover {
-    color: var(--color-accent);
-}
-
 .exp-right {
     display: flex;
     flex-direction: column;
@@ -159,14 +270,14 @@ const fluidCtrl = ref(false)
 
 .exp-period {
     font-family: 'Lora', serif;
-    font-size: 0.7rem;
+    font-size: 1rem;
     color: var(--color-amber);
     opacity: 0.75;
     letter-spacing: 0.05em;
 }
 
 .exp-role {
-    font-size: 0.82rem;
+    font-size: 1rem;
     color: rgba(230, 226, 217, 0.65);
     font-style: italic;
 }
@@ -205,7 +316,7 @@ const fluidCtrl = ref(false)
 
 .chatssb-arrow {
     font-size: 1.3rem;
-    color: var(--color-accent);
+    color: var(--color-amber);
     transition: transform 0.2s;
 }
 
@@ -234,7 +345,7 @@ const fluidCtrl = ref(false)
     letter-spacing: 0.1em;
     text-transform: uppercase;
     padding: 0.2rem 0.6rem;
-    color: var(--color-accent);
+    color: var(--color-amber);
     border: 1px solid rgba(66, 184, 131, 0.2);
 }
 
@@ -255,9 +366,16 @@ const fluidCtrl = ref(false)
 .demo-block {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
     border: 1px solid var(--color-border);
     padding: 1.5rem;
+}
+
+.demo-inner {
+    max-width: 448px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-self: center;
 }
 
 .demo-hd {
@@ -268,7 +386,7 @@ const fluidCtrl = ref(false)
 
 .demo-name {
     font-family: 'Playfair Display', serif;
-    font-size: 1.05rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--color-fg);
     letter-spacing: -0.01em;
@@ -280,12 +398,13 @@ const fluidCtrl = ref(false)
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--color-amber);
+    border: 1px solid var(--color-border);
     opacity: 0.8;
     background: none;
-    border: none;
     cursor: pointer;
-    padding: 0;
+    padding: 1em;
     transition: opacity 0.2s;
+    align-self: center;
 }
 
 .ctrl-toggle:hover {
