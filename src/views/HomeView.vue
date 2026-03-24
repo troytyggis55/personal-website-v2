@@ -8,6 +8,7 @@ const fluidCtrl = ref(false)
 </script>
 
 <template>
+    <div class="page">
     <header class="site-hero">
         <span class="header-name">Trygve Jørgensen</span>
         <img src="/images/KvadratProfilbilde.jpeg" alt="Profilbilde" class="header-photo" />
@@ -117,9 +118,21 @@ const fluidCtrl = ref(false)
             </a>
         </div>
     </footer>
+    </div>
 </template>
 
 <style scoped>
+/* ── Page wrapper ────────────────────────────── */
+.page {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.page > main {
+    flex: 1;
+}
+
 /* ── Hero ────────────────────────────────────── */
 .site-hero {
     display: grid;
@@ -183,14 +196,18 @@ const fluidCtrl = ref(false)
 
 /* ── Footer ──────────────────────────────────── */
 .site-footer {
-    margin-top: 6rem;
-    padding-top: 1.75rem;
-    padding-bottom: 4rem;
-    border-top: 1px solid var(--color-border);
+    margin-top: 8rem;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 1.75rem 2.5rem 4rem;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-top: 1px solid var(--color-border);
 }
 
 .footer-contact {
@@ -245,16 +262,16 @@ const fluidCtrl = ref(false)
 
 .exp-row {
     display: flex;
-    align-items: baseline;
+    align-items: flex-start;
     justify-content: space-between;
     gap: 1rem;
-    padding: 1.4rem 0;
+    padding: 2rem 0;
     border-bottom: 1px solid var(--color-border);
 }
 
 .exp-company {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+    font-size: clamp(1.3rem, 2.5vw, 2rem);
     font-weight: 700;
     color: var(--color-fg);
     letter-spacing: -0.01em;
