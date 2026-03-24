@@ -9,115 +9,122 @@ const fluidCtrl = ref(false)
 
 <template>
     <div class="page">
-    <header class="site-hero">
-        <span class="header-name">Trygve Jørgensen</span>
-        <img src="/images/KvadratProfilbilde.jpeg" alt="Profilbilde" class="header-photo" />
-        <p class="tagline">
-            Masterstudent i Datateknologi ved NTNU med spesialisering i effektive datasystemer.<br />
-            Kan fullstack, liker backend, <em>elsker utfordringer</em>
-            <sup>(&hellip;og hater slagord)</sup>
-        </p>
-    </header>
+        <header class="site-hero">
+            <span class="header-name">Trygve Jørgensen</span>
+            <img src="/images/KvadratProfilbilde.jpeg" alt="Profilbilde" class="header-photo" />
+            <p class="tagline">
+                Masterstudent i Datateknologi ved NTNU med spesialisering i effektive
+                datasystemer.<br />
+                Kan fullstack, liker backend, <em>elsker utfordringer</em>
+                <sup>(&hellip;og hater slagord)</sup>
+            </p>
+        </header>
 
-    <main class="flex flex-col gap-20">
-        <!-- Experience -->
-        <section>
-            <p class="eyebrow">Erfaring</p>
-            <div class="exp-list">
-                <div class="exp-row">
-                    <span class="exp-company">Bekk</span>
-                    <div class="exp-right">
-                        <span class="exp-period">Sommer 2025</span>
-                        <span class="exp-role">Sommerjobb · konsulent</span>
-                    </div>
-                </div>
-                <div class="exp-row">
-                    <span class="exp-company">TIHLDE</span>
-                    <div class="exp-right">
-                        <span class="exp-period">2024–25</span>
-                        <span class="exp-role">Leder for linjeforening · 700+ studenter</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Project -->
-        <section>
-            <p class="eyebrow">Prosjekt</p>
-            <a href="https://chatssb.no" target="_blank" class="chatssb-card">
-                <div class="chatssb-header">
-                    <span class="chatssb-name">ChatSSB.no</span>
-                    <span class="chatssb-arrow">↗</span>
-                </div>
-                <p class="chatssb-desc">
-                    AI-drevet chatgrensesnitt som gjør SSBs åpne data dramatisk mer tilgjengelig —
-                    hvem som helst kan utforske norsk statistikk uten tekniske forkunnskaper.
-                </p>
-                <div class="chatssb-tags">
-                    <span class="tag">Fullstack</span>
-                    <span class="tag">API-integrasjon</span>
-                    <span class="tag">AI</span>
-                </div>
-            </a>
-        </section>
-
-        <!-- Demos -->
-        <section>
-            <p class="eyebrow">"Håndlaget" kode anno 2023</p>
-            <div class="demos-wrap">
-                <div class="demo-block">
-                    <div class="demo-inner">
-                        <div class="demo-hd">
-                            <span class="demo-name">Pathfinding</span>
+        <main class="flex flex-col gap-20">
+            <!-- Experience -->
+            <section>
+                <p class="eyebrow">Erfaring</p>
+                <div class="exp-list">
+                    <div class="exp-row">
+                        <span class="exp-company">Bekk</span>
+                        <div class="exp-right">
+                            <span class="exp-period">Sommer 2025</span>
+                            <span class="exp-role">Sommerjobb · konsulent</span>
                         </div>
-                        <DemoPathfinding :show-controls="pathCtrl" />
-                        <button
-                            class="ctrl-toggle"
-                            @click="pathCtrl = !pathCtrl"
-                            :aria-expanded="pathCtrl"
-                        >
-                            {{ pathCtrl ? 'skjul' : 'innstillinger' }}
-                        </button>
                     </div>
-                </div>
-
-                <div class="demo-block">
-                    <div class="demo-inner">
-                        <div class="demo-hd">
-                            <span class="demo-name">Fluid simulations</span>
+                    <div class="exp-row">
+                        <span class="exp-company">TIHLDE</span>
+                        <div class="exp-right">
+                            <span class="exp-period">2024–25</span>
+                            <span class="exp-role">Leder for linjeforening · 700+ studenter</span>
                         </div>
-                        <DemoFluid :show-controls="fluidCtrl" />
-                        <button
-                            class="ctrl-toggle"
-                            @click="fluidCtrl = !fluidCtrl"
-                            :aria-expanded="fluidCtrl"
-                        >
-                            {{ fluidCtrl ? 'skjul' : 'innstillinger' }}
-                        </button>
                     </div>
                 </div>
-            </div>
-        </section>
-    </main>
+            </section>
 
-    <footer class="site-footer">
-        <div class="footer-contact">
-            <p>+47 94 05 05 56</p>
-            <a href="mailto:trygveabjo@gmail.com">trygveabjo@gmail.com</a>
-        </div>
-        <div class="footer-icons">
-            <a href="https://github.com/troytyggis55" target="_blank" class="hover-glow">
-                <img src="/src/svg/github.svg" alt="GitHub" class="footer-icon" />
-            </a>
-            <a
-                href="https://www.linkedin.com/in/trygve-j%C3%B8rgensen-80b1b9259/"
-                target="_blank"
-                class="hover-glow"
-            >
-                <img src="/src/svg/linkedin.svg" alt="LinkedIn" class="footer-icon" />
-            </a>
-        </div>
-    </footer>
+            <!-- Project -->
+            <section>
+                <p class="eyebrow">Prosjekt</p>
+                <a href="https://chatssb.no" target="_blank" class="chatssb-card">
+                    <div class="chatssb-header">
+                        <span class="chatssb-name">ChatSSB.no</span>
+                        <span class="chatssb-arrow">↗</span>
+                    </div>
+                    <p class="chatssb-desc">
+                        AI-drevet chatgrensesnitt som gjør SSBs åpne data dramatisk mer tilgjengelig
+                        — hvem som helst kan utforske norsk statistikk uten tekniske forkunnskaper.
+                    </p>
+                    <div class="chatssb-tags">
+                        <span class="tag">Fullstack</span>
+                        <span class="tag">API-integrasjon</span>
+                        <span class="tag">AI</span>
+                    </div>
+                </a>
+            </section>
+
+            <!-- Demos -->
+            <section>
+                <p class="eyebrow">"Håndlaget" kode anno 2023</p>
+                <div class="demos-wrap">
+                    <div class="demo-block">
+                        <div class="demo-inner">
+                            <div class="demo-hd">
+                                <span class="demo-name">Pathfinding</span>
+                            </div>
+                            <DemoPathfinding :show-controls="pathCtrl" />
+                            <button
+                                class="ctrl-toggle"
+                                @click="pathCtrl = !pathCtrl"
+                                :aria-expanded="pathCtrl"
+                            >
+                                {{ pathCtrl ? 'skjul' : 'innstillinger' }}
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="demo-block">
+                        <div class="demo-inner">
+                            <div class="demo-hd">
+                                <span class="demo-name">Fluid simulations</span>
+                            </div>
+                            <DemoFluid :show-controls="fluidCtrl" />
+                            <button
+                                class="ctrl-toggle"
+                                @click="fluidCtrl = !fluidCtrl"
+                                :aria-expanded="fluidCtrl"
+                            >
+                                {{ fluidCtrl ? 'skjul' : 'innstillinger' }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-contact">
+                <p>+47 94 05 05 56</p>
+                <a href="mailto:trygveabjo@gmail.com">trygveabjo@gmail.com</a>
+            </div>
+            <div class="footer-icons">
+                <a
+                    href="https://github.com/troytyggis55"
+                    target="_blank"
+                    class="footer-link hover-glow"
+                >
+                    <img src="/src/svg/github.svg" alt="" class="footer-icon" />
+                    <span>GitHub</span>
+                </a>
+                <a
+                    href="https://www.linkedin.com/in/trygve-j%C3%B8rgensen-80b1b9259/"
+                    target="_blank"
+                    class="footer-link hover-glow"
+                >
+                    <img src="/src/svg/linkedin.svg" alt="" class="footer-icon" />
+                    <span>LinkedIn</span>
+                </a>
+            </div>
+        </footer>
     </div>
 </template>
 
@@ -202,10 +209,9 @@ const fluidCtrl = ref(false)
     left: 50%;
     transform: translateX(-50%);
     padding: 1.75rem 2.5rem 4rem;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
     background: rgba(255, 255, 255, 0.03);
     border-top: 1px solid var(--color-border);
 }
@@ -215,8 +221,10 @@ const fluidCtrl = ref(false)
     flex-direction: column;
     align-items: flex-end;
     gap: 0.1rem;
-    font-size: 0.8rem;
-    color: rgba(230, 226, 217, 0.35);
+    font-size: 0.9rem;
+    color: rgba(230, 226, 217, 0.59);
+    padding-right: 1.5rem;
+    justify-self: end;
 }
 
 .footer-contact a:hover {
@@ -225,16 +233,32 @@ const fluidCtrl = ref(false)
 
 .footer-icons {
     display: flex;
-    gap: 0.75rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-left: 1.5rem;
+    border-left: 1px solid var(--color-border);
+}
+
+.footer-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: rgba(230, 226, 217, 0.59);
+    transition: color 0.2s;
+}
+
+.footer-link:hover {
+    color: var(--color-fg);
 }
 
 .footer-icon {
-    height: 1.75rem;
+    height: 1.1rem;
     opacity: 0.5;
     transition: opacity 0.2s;
 }
 
-.footer-icons a:hover .footer-icon {
+.footer-link:hover .footer-icon {
     opacity: 0.9;
 }
 
