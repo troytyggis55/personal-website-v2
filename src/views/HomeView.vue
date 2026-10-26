@@ -3,6 +3,8 @@ import DemoPathfinding from '@/components/DemoPathfinding.vue'
 import DemoFluid from '@/components/DemoFluid.vue'
 import { ref } from 'vue'
 
+const baseUrl = import.meta.env.BASE_URL
+
 const pathCtrl = ref(false)
 const fluidCtrl = ref(false)
 </script>
@@ -11,7 +13,7 @@ const fluidCtrl = ref(false)
     <div class="page">
         <header class="site-hero">
             <span class="header-name">Trygve Jørgensen</span>
-            <img src="/images/KvadratProfilbilde.jpeg" alt="Profilbilde" class="header-photo" />
+            <img :src="`${baseUrl}images/KvadratProfilbilde.jpeg`" alt="Profilbilde" class="header-photo" />
             <p class="tagline">
                 Masterstudent i Datateknologi ved NTNU med spesialisering i effektive
                 datasystemer.<br />

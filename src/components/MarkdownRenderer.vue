@@ -31,7 +31,7 @@ interface FrontMatter {
     category?: string
 }
 
-const filepath = `/markdown/${useSessionStore().language}/${props.filename}.md`
+const filepath = `${import.meta.env.BASE_URL}markdown/${useSessionStore().language}/${props.filename}.md`
 
 const markdown = new MarkdownIt()
 const markdownContent = ref('')
