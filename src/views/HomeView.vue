@@ -16,7 +16,6 @@ const fluidCtrl = ref(false)
                 Masterstudent i Datateknologi ved NTNU med spesialisering i effektive
                 datasystemer.<br />
                 Kan fullstack, liker backend, <em>elsker utfordringer</em>
-                <sup>(&hellip;og hater slagord)</sup>
             </p>
         </header>
 
@@ -28,8 +27,15 @@ const fluidCtrl = ref(false)
                     <div class="exp-row">
                         <span class="exp-company">Bekk</span>
                         <div class="exp-right">
+                            <span class="exp-period">Sommer 2026</span>
+                            <span class="exp-role">Sommerjobb · Utvikler hos Møller Mobility Group</span>
+                        </div>
+                    </div>
+                    <div class="exp-row">
+                        <span class="exp-company">Bekk</span>
+                        <div class="exp-right">
                             <span class="exp-period">Sommer 2025</span>
-                            <span class="exp-role">Sommerjobb · konsulent</span>
+                            <span class="exp-role">Sommerjobb · Utvikler hos NOKUT</span>
                         </div>
                     </div>
                     <div class="exp-row">
@@ -44,22 +50,58 @@ const fluidCtrl = ref(false)
 
             <!-- Project -->
             <section>
-                <p class="eyebrow">Prosjekt</p>
-                <a href="https://chatssb.no" target="_blank" class="chatssb-card">
-                    <div class="chatssb-header">
-                        <span class="chatssb-name">ChatSSB.no</span>
-                        <span class="chatssb-arrow">↗</span>
-                    </div>
-                    <p class="chatssb-desc">
-                        AI-drevet chatgrensesnitt som gjør SSBs åpne data dramatisk mer tilgjengelig
-                        — hvem som helst kan utforske norsk statistikk uten tekniske forkunnskaper.
-                    </p>
-                    <div class="chatssb-tags">
-                        <span class="tag">Fullstack</span>
-                        <span class="tag">API-integrasjon</span>
-                        <span class="tag">AI</span>
-                    </div>
-                </a>
+                <p class="eyebrow">Prosjekter</p>
+                <div class="project-list">
+                    <a href="https://pindex.no" target="_blank" class="project-card">
+                        <div class="project-header">
+                            <span class="project-name">Pindex.no</span>
+                            <span class="project-arrow">↗</span>
+                        </div>
+                        <p class="project-desc">
+                            Digital plattform for studenfrivillighetens pinkultur.
+                            Lar brukere se sin egen samling, utføre bildsøk, registrere nye pins og se hvor de ligger an på ledertavlen.
+                        </p>
+                        <div class="project-tags">
+                            
+                            <span class="tag">Vektor Embedding</span>
+                            <span class="tag">Tanstack</span>
+                            <span class="tag">Supabase</span>
+                            <span class="tag">Fullstack</span>
+                        </div>
+                    </a>                 
+                    <a href="https://troytyggis55.github.io/SkiVMPublicTransport/" target="_blank" class="project-card">
+                        <div class="project-header">
+                            <span class="project-name">Ski-VM og Trondheims kollektiv</span>
+                            <span class="project-arrow">↗</span>
+                        </div>
+                        <p class="project-desc">
+                            Visualisering av EnTur data som viser hvordan den ekstreme trafikken under Ski-VM 2025 påvirket kollektivsystemet i Trondheim.
+                            Se et nettverk av busser bevege seg mellom stopp og hvilket som ble størst utsatt for traffikstopp og forsinkelser.
+                        </p>
+                        <div class="project-tags">
+                            
+                            <span class="tag">Data og Analyse</span>
+                            <span class="tag">Visualisering</span>
+                            <span class="tag">Entur Data</span>
+                        </div>
+                    </a>
+                    <a href="https://chatssb.no" target="_blank" class="project-card">
+                        <div class="project-header">
+                            <span class="project-name">ChatSSB.no</span>
+                            <span class="project-arrow">↗</span>
+                        </div>
+                        <p class="project-desc">
+                            Agentisk chatgrensesnitt som gjør SSBs åpne data dramatisk mer
+                            tilgjengelig. Hvem som helst kan nå raskt utforske norsk statistikk uten
+                            tekniske forkunnskaper.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Harness Engineering</span>
+                            <span class="tag">LLM evaluering</span>
+                            <span class="tag">Fullstack</span>
+                        </div>
+                    </a>
+                </div>
             </section>
 
             <!-- Demos -->
@@ -323,9 +365,16 @@ const fluidCtrl = ref(false)
     font-style: italic;
 }
 
-/* ── ChatSSB ─────────────────────────────────── */
-.chatssb-card {
-    display: block;
+/* ── Projects ──────────────────────────────────── */
+.project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.project-card {
+    display: flex;
+    flex-direction: column;
     text-decoration: none;
     padding: 2rem 2.25rem;
     border: 1px solid var(--color-border);
@@ -333,21 +382,22 @@ const fluidCtrl = ref(false)
     transition:
         background 0.25s,
         border-color 0.25s;
+    min-height: 16rem;
 }
 
-.chatssb-card:hover {
+.project-card:hover {
     background: rgba(255, 255, 255, 0.04);
     border-color: rgba(66, 184, 131, 0.35);
 }
 
-.chatssb-header {
+.project-header {
     display: flex;
     align-items: baseline;
     gap: 0.5rem;
     margin-bottom: 0.9rem;
 }
 
-.chatssb-name {
+.project-name {
     font-family: 'Playfair Display', serif;
     font-size: clamp(1.6rem, 3.5vw, 2.4rem);
     font-weight: 700;
@@ -355,28 +405,29 @@ const fluidCtrl = ref(false)
     letter-spacing: -0.02em;
 }
 
-.chatssb-arrow {
+.project-arrow {
     font-size: 1.3rem;
     color: var(--color-amber);
     transition: transform 0.2s;
 }
 
-.chatssb-card:hover .chatssb-arrow {
+.project-card:hover .project-arrow {
     transform: translate(3px, -3px);
 }
 
-.chatssb-desc {
+.project-desc {
     font-size: 0.95rem;
     color: rgba(230, 226, 217, 0.55);
     line-height: 1.7;
     max-width: 58ch;
 }
 
-.chatssb-tags {
+.project-tags {
     display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
-    margin-top: 1.25rem;
+    margin-top: auto;
+    padding-top: 1.25rem;
 }
 
 .tag {
