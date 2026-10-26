@@ -63,10 +63,9 @@ const fluidCtrl = ref(false)
                         </p>
                         <div class="project-tags">
                             
+                            <span class="tag">End-to-End</span>
                             <span class="tag">Vektor Embedding</span>
-                            <span class="tag">Tanstack</span>
-                            <span class="tag">Supabase</span>
-                            <span class="tag">Fullstack</span>
+                            <span class="tag">Brukerrettet</span>
                         </div>
                     </a>                 
                     <a href="https://troytyggis55.github.io/SkiVMPublicTransport/" target="_blank" class="project-card">
